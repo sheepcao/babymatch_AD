@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D8D7F948-68F6-43E1-9241-82161909F6CD</string>
+	<key>IDESourceControlProjectName</key>
+	<string>babyJoint</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>08E5C6F99B7AACE1548EEA98EE18140DAB8766AA</key>
+		<string>https://github.com/sheepcao/completeImage.git</string>
+		<key>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</key>
+		<string>https://github.com/sheepcao/completeImage_charge.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>babyJoint.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>08E5C6F99B7AACE1548EEA98EE18140DAB8766AA</key>
+		<string>../../../completeImage</string>
+		<key>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/sheepcao/completeImage_charge.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>08E5C6F99B7AACE1548EEA98EE18140DAB8766AA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>completeImage</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>completeImage_charge</string>
+		</dict>
+	</array>
+</dict>
+</plist>
