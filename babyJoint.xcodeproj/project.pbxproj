@@ -816,11 +816,6 @@
 		0BE582C8193F25FB00EEAB26 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE582C7193F25FB00EEAB26 /* AppDelegate.m */; };
 		0BE582CE193F25FB00EEAB26 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE582CD193F25FB00EEAB26 /* ViewController.m */; };
 		0BE582D0193F25FB00EEAB26 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BE582CF193F25FB00EEAB26 /* Images.xcassets */; };
-		0BE582D7193F25FB00EEAB26 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE582D6193F25FB00EEAB26 /* XCTest.framework */; };
-		0BE582D8193F25FB00EEAB26 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE582B7193F25FB00EEAB26 /* Foundation.framework */; };
-		0BE582D9193F25FB00EEAB26 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE582BB193F25FB00EEAB26 /* UIKit.framework */; };
-		0BE582E1193F25FB00EEAB26 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BE582DF193F25FB00EEAB26 /* InfoPlist.strings */; };
-		0BE582E3193F25FB00EEAB26 /* completeImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE582E2193F25FB00EEAB26 /* completeImageTests.m */; };
 		0BE582EF193F280B00EEAB26 /* gameLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE582EE193F280B00EEAB26 /* gameLevel.m */; };
 		0BE582F2193F285200EEAB26 /* answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE582F1193F285200EEAB26 /* answer.m */; };
 		0BE582F5193F287300EEAB26 /* uncompleteImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE582F4193F287300EEAB26 /* uncompleteImage.m */; };
@@ -876,16 +871,6 @@
 		A47080E219FE1BD9002CDDE0 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A47080E019FE1BD9002CDDE0 /* libGoogleAdMobAds.a */; };
 		A47080E319FE1BD9002CDDE0 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = A47080E119FE1BD9002CDDE0 /* README.txt */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		0BE582DA193F25FB00EEAB26 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0BE582AC193F25FB00EEAB26 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0BE582B3193F25FB00EEAB26;
-			remoteInfo = completeImage;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0B0844FB1996439100367DAC /* babyText3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = babyText3.png; sourceTree = "<group>"; };
@@ -1714,7 +1699,6 @@
 		0BE582CC193F25FB00EEAB26 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0BE582CD193F25FB00EEAB26 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0BE582CF193F25FB00EEAB26 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0BE582D5193F25FB00EEAB26 /* babyJointTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = babyJointTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BE582D6193F25FB00EEAB26 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0BE582DE193F25FB00EEAB26 /* completeImageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "completeImageTests-Info.plist"; sourceTree = "<group>"; };
 		0BE582E0193F25FB00EEAB26 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1853,16 +1837,6 @@
 				0BE582BC193F25FB00EEAB26 /* UIKit.framework in Frameworks */,
 				0BE582B8193F25FB00EEAB26 /* Foundation.framework in Frameworks */,
 				0B851B1119EA5D4F00C1FC86 /* WeChatConnection.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0BE582D2193F25FB00EEAB26 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0BE582D7193F25FB00EEAB26 /* XCTest.framework in Frameworks */,
-				0BE582D9193F25FB00EEAB26 /* UIKit.framework in Frameworks */,
-				0BE582D8193F25FB00EEAB26 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2442,7 +2416,6 @@
 			isa = PBXGroup;
 			children = (
 				0BE582B4193F25FB00EEAB26 /* Baby Match!.app */,
-				0BE582D5193F25FB00EEAB26 /* babyJointTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3146,24 +3119,6 @@
 			productReference = 0BE582B4193F25FB00EEAB26 /* Baby Match!.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0BE582D4193F25FB00EEAB26 /* babyJointTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0BE582E9193F25FB00EEAB26 /* Build configuration list for PBXNativeTarget "babyJointTests" */;
-			buildPhases = (
-				0BE582D1193F25FB00EEAB26 /* Sources */,
-				0BE582D2193F25FB00EEAB26 /* Frameworks */,
-				0BE582D3193F25FB00EEAB26 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0BE582DB193F25FB00EEAB26 /* PBXTargetDependency */,
-			);
-			name = babyJointTests;
-			productName = completeImageTests;
-			productReference = 0BE582D5193F25FB00EEAB26 /* babyJointTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3175,9 +3130,6 @@
 				TargetAttributes = {
 					0BE582B3193F25FB00EEAB26 = {
 						DevelopmentTeam = DBBLJY69ER;
-					};
-					0BE582D4193F25FB00EEAB26 = {
-						TestTargetID = 0BE582B3193F25FB00EEAB26;
 					};
 				};
 			};
@@ -3196,7 +3148,6 @@
 			projectRoot = "";
 			targets = (
 				0BE582B3193F25FB00EEAB26 /* babyJoint */,
-				0BE582D4193F25FB00EEAB26 /* babyJointTests */,
 			);
 		};
 /* End PBXProject section */
@@ -4017,14 +3968,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0BE582D3193F25FB00EEAB26 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0BE582E1193F25FB00EEAB26 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -4049,23 +3992,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0BE582D1193F25FB00EEAB26 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0BE582E3193F25FB00EEAB26 /* completeImageTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0BE582DB193F25FB00EEAB26 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0BE582B3193F25FB00EEAB26 /* babyJoint */;
-			targetProxy = 0BE582DA193F25FB00EEAB26 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0B851AF519EA5D4F00C1FC86 /* ShareSDKLocalizable.strings */ = {
@@ -4262,46 +4189,6 @@
 			};
 			name = Release;
 		};
-		0BE582EA193F25FB00EEAB26 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Baby Match!.app/Baby Match!";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "completeImage/completeImage-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "completeImageTests/completeImageTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		0BE582EB193F25FB00EEAB26 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Baby Match!.app/Baby Match!";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "completeImage/completeImage-Prefix.pch";
-				INFOPLIST_FILE = "completeImageTests/completeImageTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4319,15 +4206,6 @@
 			buildConfigurations = (
 				0BE582E7193F25FB00EEAB26 /* Debug */,
 				0BE582E8193F25FB00EEAB26 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0BE582E9193F25FB00EEAB26 /* Build configuration list for PBXNativeTarget "babyJointTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0BE582EA193F25FB00EEAB26 /* Debug */,
-				0BE582EB193F25FB00EEAB26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

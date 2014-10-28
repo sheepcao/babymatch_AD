@@ -141,25 +141,10 @@ UIView *tmpCustomView;
 //    [self.retakeButton setImage:[UIImage imageNamed:@"重拍"] forState:UIControlStateNormal];
     [self.retakeButton addTarget:self action:@selector(photograph:) forControlEvents:UIControlEventTouchUpInside];
     
-//    self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(243, 498, 60, 60)];
-//    [self.savePic setImage:[UIImage imageNamed:@"保存"] forState:UIControlStateNormal];
+
     [self.savePic addTarget:self action:@selector(saveImage:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-
-//    self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(100, 390, 120, 55)];
-//    [self.photograph setTitle:@"我也要拍" forState:UIControlStateNormal];
-//    self.photograph.backgroundColor = [UIColor lightGrayColor];
-//    self.photograph.alpha = 0.6f;
-/*
-
-    }else if(level %11 ==0)
-    {
-        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(110, 515, 100, 30)];
-        [self.photograph setTitle:@"我也要拍" forState:UIControlStateNormal];
-        self.photograph.backgroundColor = [UIColor lightGrayColor];
-    }
- */
+ 
     [self.photograph addTarget:self action:@selector(photograph:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:self.shareView];
@@ -216,8 +201,7 @@ UIView *tmpCustomView;
 
         }else
         {
-//            self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]]];
-            UIGraphicsBeginImageContext(self.view.frame.size);
+             UIGraphicsBeginImageContext(self.view.frame.size);
             [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]] drawInRect:self.view.bounds];
             UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();

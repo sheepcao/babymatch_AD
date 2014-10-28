@@ -299,11 +299,11 @@ bool levelLock[bigLevel];
     
     
 //    ad.....big
-    if (ADTimer ==nil) {
-        
-        ADTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(bigAd) userInfo:nil repeats:NO];
-
-    }
+//    if (ADTimer ==nil) {
+//        
+//        ADTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(bigAd) userInfo:nil repeats:NO];
+//
+//    }
     
 
     
@@ -340,19 +340,19 @@ bool levelLock[bigLevel];
 }
 
 //ad...big
--(void)bigAd
-{
-    self.interstitial = [[GADInterstitial alloc] init];
-    self.interstitial.delegate = self;
-    
-    // Note: Edit InterstitialExampleAppDelegate.m to update
-    // INTERSTITIAL_AD_UNIT_ID with your interstitial ad unit id.
-    AppDelegate *appDelegate =
-    (AppDelegate *)[UIApplication sharedApplication].delegate;
-    self.interstitial.adUnitID = ADMOB_ID_DaysInLine;
-    
-    [self.interstitial loadRequest: [appDelegate createRequest]];
-}
+//-(void)bigAd
+//{
+//    self.interstitial = [[GADInterstitial alloc] init];
+//    self.interstitial.delegate = self;
+//    
+//    // Note: Edit InterstitialExampleAppDelegate.m to update
+//    // INTERSTITIAL_AD_UNIT_ID with your interstitial ad unit id.
+//    AppDelegate *appDelegate =
+//    (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    self.interstitial.adUnitID = ADMOB_ID_DaysInLine;
+//    
+//    [self.interstitial loadRequest: [appDelegate createRequest]];
+//}
 
 
 
@@ -362,11 +362,11 @@ bool levelLock[bigLevel];
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:@"selectLevelPage"];
     //ad...big
-    if (ADTimer != nil)
-	{
-		[ADTimer invalidate];
-		ADTimer = nil;
-	}
+//    if (ADTimer != nil)
+//	{
+//		[ADTimer invalidate];
+//		ADTimer = nil;
+//	}
 }
 - (IBAction)animalBtn:(UIButton *)sender {
     
@@ -608,7 +608,6 @@ bool levelLock[bigLevel];
     
     wrongAnswer = [[UIImageView alloc] initWithFrame:CGRectMake(45, 145, 110, 40)];
    
-    
     cancelInAlert = [[UIButton alloc] initWithFrame:CGRectMake(105, 145, 90, 47)];
     
     tmpCustomView.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"alertBackground" ofType:@"png"]]];
@@ -655,6 +654,10 @@ bool levelLock[bigLevel];
     answer.delegate = self;
     answer.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     answer.tag = 0;
+    
+    //listerner
+    [answer addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
 
     unsigned int randomA = arc4random()%20;
     unsigned int randomB = arc4random()%20;
@@ -823,6 +826,9 @@ bool levelLock[bigLevel];
     answer.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     answer.tag = 1;
     
+    //add listener
+    [answer addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
     unsigned int randomA = arc4random()%20;
     unsigned int randomB = arc4random()%20;
     resultNum = randomA+randomB;
@@ -883,26 +889,26 @@ bool levelLock[bigLevel];
 }
 
 //ad...big
-#pragma bigAD delegate method
-- (void)interstitial:(GADInterstitial *)interstitial
-didFailToReceiveAdWithError:(GADRequestError *)error {
-    // Alert the error.
-
-    NSLog(@"big ad error:%@",[error description]);
-}
-
-- (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {
-    [interstitial presentFromRootViewController:self];
-
-}
-- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial
-{
-    [ADTimer invalidate];
-    ADTimer =nil;
-    ADTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(bigAd) userInfo:nil repeats:NO];
-
-
-}
+//#pragma bigAD delegate method
+//- (void)interstitial:(GADInterstitial *)interstitial
+//didFailToReceiveAdWithError:(GADRequestError *)error {
+//    // Alert the error.
+//
+//    NSLog(@"big ad error:%@",[error description]);
+//}
+//
+//- (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial {
+//    [interstitial presentFromRootViewController:self];
+//
+//}
+//- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial
+//{
+//    [ADTimer invalidate];
+//    ADTimer =nil;
+//    ADTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(bigAd) userInfo:nil repeats:NO];
+//
+//
+//}
 
 
 - (void)snailAnimation {
@@ -921,40 +927,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     [trackPath addLineToPoint:P(280,self.movingSnail.frame.origin.y+1+16)];
     [trackPath addLineToPoint:P(350,self.movingSnail.frame.origin.y-5+16)];
 
-//	[trackPath addCurveToPoint:P(300, 120)
-//				 controlPoint1:P(320, 0)
-//				 controlPoint2:P(300, 80)];
-//	[trackPath addCurveToPoint:P(80, 380)
-//				 controlPoint1:P(300, 200)
-//				 controlPoint2:P(200, 480)];
-//	[trackPath addCurveToPoint:P(140, 300)
-//				 controlPoint1:P(0, 300)
-//				 controlPoint2:P(200, 220)];
-//	[trackPath addCurveToPoint:P(210, 200)
-//				 controlPoint1:P(30, 420)
-//				 controlPoint2:P(280, 300)];
-//	[trackPath addCurveToPoint:P(70, 110)
-//				 controlPoint1:P(110, 80)
-//				 controlPoint2:P(110, 80)];
-//	[trackPath addCurveToPoint:P(160, 25)
-//				 controlPoint1:P(0, 160)
-//				 controlPoint2:P(0, 40)];
-//	
-//	CAShapeLayer *racetrack = [CAShapeLayer layer];
-//	racetrack.path = trackPath.CGPath;
-//	racetrack.strokeColor = [UIColor blackColor].CGColor;
-//	racetrack.fillColor = [UIColor clearColor].CGColor;
-//	racetrack.lineWidth = 30.0;
-//	[self.view.layer addSublayer:racetrack];
-    
-//	CAShapeLayer *centerline = [CAShapeLayer layer];
-//	centerline.path = trackPath.CGPath;
-//	centerline.strokeColor = [UIColor whiteColor].CGColor;
-//	centerline.fillColor = [UIColor clearColor].CGColor;
-//	centerline.lineWidth = 2.0;
-//	centerline.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:6], [NSNumber numberWithInt:2], nil];
-//	[self.view.layer addSublayer:centerline];
-	
 	CALayer *car = [CALayer layer];
 	car.bounds = CGRectMake(0, 0, 40, 40);
 	car.position = P(-30,self.movingSnail.frame.origin.y);
@@ -1000,20 +972,21 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 
 }
 
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
-//    {
-//        [self.lockedAlert close];
-//        [self shareFunc];
-//        
-//    }else
-//    {
-//        [wrongAnswer setHidden:NO];
-//    }
-//    
-//}
-//
+
+
+#pragma mark keyboard delegate
+
+-(void)textFieldDidChange:(UITextField *)sender
+{
+    UITextField *textField = (UITextField *)sender;
+    if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
+    {
+        [self.lockedAlert close];
+        [self shareFunc];
+        
+    }
+
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

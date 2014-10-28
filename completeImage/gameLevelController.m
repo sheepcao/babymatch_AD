@@ -27,6 +27,7 @@ double repeatTime[MAXlevel] = {3,1,3,1,1,/*5*/2,2,2,2,3,/*10*/2,2,2,2,2,/*15*/2,
 double largeEmpty[bigLevel] = {122.22,200,55,55,55};
 bool haveFixed[MAXlevel] = {NO};
 bool notJumpOver = NO;
+bool isFromAD = NO;
 
 
 
@@ -146,7 +147,7 @@ NSMutableArray  *arrayGif;
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
 
     
-  //set ad......iad and admob
+  //set...iad and admob
     if ([[UIScreen mainScreen] bounds].size.height == 568) {
         self.iAdBannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
         
@@ -224,10 +225,15 @@ NSMutableArray  *arrayGif;
     }
     
     //投稿alert.
-    if ((level-10)%10 == 1) {
+    if ((level-10)%10 == 1 ) {
         
+        if (!isFromAD) {
+            [self setupAlert];
+        }
+        else
+            isFromAD = NO;
    
-        [self setupAlert];
+        
         
     }
 
@@ -992,6 +998,7 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 - (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial
 {
     [ADTimer invalidate];
+    isFromAD = YES;
     ADTimer =nil;
     ADTimer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(bigAd) userInfo:nil repeats:NO];
     
