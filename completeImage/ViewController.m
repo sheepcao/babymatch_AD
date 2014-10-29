@@ -19,7 +19,8 @@
 @property (nonatomic ,strong)gameLevelController *game;
 @property (nonatomic ,strong) UIButton *lockedInAlert;
 @property (nonatomic ,strong) UIButton *cancelInAlert;
-
+@property (nonatomic ,strong) UIButton *lockedInBuyAlert;
+@property (nonatomic ,strong) UIButton *cancelInBuyAlert;
 
 @property (nonatomic ,strong) NSMutableArray *lockImg;
 @end
@@ -318,6 +319,7 @@ bool levelLock[bigLevel];
 
         UIButton *levelEntrance = (UIButton *)[self.view viewWithTag:(i+1)];
 
+
         
         if (i>(levelTop-1)/10) {
             
@@ -333,6 +335,13 @@ bool levelLock[bigLevel];
             
         }
        
+        if (levelTop == 21) {
+            
+            UIButton *levelEntrance3 = (UIButton *)[self.view viewWithTag:3];
+            [levelEntrance3 addSubview:self.lockImg[2]];
+            [levelEntrance3 bringSubviewToFront:self.lockImg[2]];
+            
+        }
    
         
     }
@@ -463,6 +472,54 @@ bool levelLock[bigLevel];
 
 }
 
+-(void)setupBuyAlert
+{
+    
+    UIView *tmpCustomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 , 300, 208)];
+       self.lockedInBuyAlert = [[UIButton alloc] initWithFrame:CGRectMake(40, 105, 90, 90)];
+    self.cancelInBuyAlert = [[UIButton alloc] initWithFrame:CGRectMake(170, 105, 90, 90)];
+    
+    if ([CommonUtility isSystemLangChinese]) {
+        
+        tmpCustomView.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"收费弹框" ofType:@"png"]]];
+        
+        
+        [self.lockedInBuyAlert setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"火速前往" ofType:@"png"]] forState:UIControlStateNormal];
+        [self.cancelInBuyAlert setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"残忍拒绝" ofType:@"png"]] forState:UIControlStateNormal];
+        
+        
+    }else
+    {
+        tmpCustomView.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"收费弹框-en" ofType:@"png"]]];
+        
+        
+        [self.lockedInBuyAlert setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"downlaod" ofType:@"png"]] forState:UIControlStateNormal];
+        [self.cancelInBuyAlert setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"refuse" ofType:@"png"]] forState:UIControlStateNormal];
+    }
+    
+   
+    
+    [self.lockedInBuyAlert addTarget:self action:@selector(goToDownload) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelInBuyAlert addTarget:self action:@selector(closeAlert) forControlEvents:UIControlEventTouchUpInside];
+    
+    [tmpCustomView addSubview:self.lockedInBuyAlert];
+    [tmpCustomView addSubview:self.cancelInBuyAlert];
+    
+    
+    CustomIOS7AlertView *alert = [[CustomIOS7AlertView alloc] init];
+    [alert setButtonTitles:[NSMutableArray arrayWithObjects:nil]];
+    alert.backgroundColor = [UIColor whiteColor];
+    
+    [alert setContainerView:tmpCustomView];
+    
+    self.lockedAlert = alert;
+    [alert show];
+    
+    
+    
+}
+
+
 -(void)closeAlert
 {
     [CommonUtility tapSound:@"backAndCancel" withType:@"mp3"];
@@ -470,6 +527,34 @@ bool levelLock[bigLevel];
     [self.lockedAlert close];
 }
 
+-(void)goToDownload
+{
+    
+    [CommonUtility tapSound];
+    [self.lockedAlert close];
+
+
+    if([[self currentLanguage] compare:@"zh-Hans" options:NSCaseInsensitiveSearch]==NSOrderedSame || [[self currentLanguage] compare:@"zh-Hant" options:NSCaseInsensitiveSearch]==NSOrderedSame)
+    {
+        NSLog(@"current Language == Chinese");
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8"]];
+        
+        
+    }else{
+        NSLog(@"current Language == English");
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8"]];
+        
+    }
+
+}
+
+-(NSString*)currentLanguage
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
+    NSString *currentLang = [languages objectAtIndex:0];
+    return currentLang;
+}
 -(void)goToLevelNow
 {
     [CommonUtility tapSound];
@@ -519,7 +604,7 @@ bool levelLock[bigLevel];
     
     if (levelLock[sender.tag-1]) {
         
-        [self setupAlert];
+        [self setupBuyAlert];
         
         
     }else{
@@ -540,7 +625,7 @@ bool levelLock[bigLevel];
     
     if (levelLock[sender.tag-1]) {
         
-        [self setupAlert];
+        [self setupBuyAlert];
         
         
     }else{
@@ -564,7 +649,7 @@ bool levelLock[bigLevel];
     
     if (levelLock[sender.tag-1]) {
         
-        [self setupAlert];
+        [self setupBuyAlert];
         
         
     }else{
@@ -979,13 +1064,30 @@ bool levelLock[bigLevel];
 -(void)textFieldDidChange:(UITextField *)sender
 {
     UITextField *textField = (UITextField *)sender;
-    if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
-    {
-        [self.lockedAlert close];
-        [self shareFunc];
+    
+    if (textField.tag ==0) {
         
+        
+        if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
+        {
+            
+            [self.lockedAlert close];
+            [self shareFunc];
+            
+        }
+        
+    }else
+    {
+        if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
+        {
+            [self.lockedAlert close];
+            [self moreInfo];
+            
+            
+            
+        }
     }
-
+        
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

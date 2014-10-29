@@ -110,7 +110,7 @@ NSMutableArray  *arrayGif;
     self.choices = [[NSMutableArray alloc] initWithObjects:self.answer1,self.answer2,self.answer3, nil];
     NSString *words1 = @"猪,猫,兔子,鸡,青蛙,蜜蜂,狗,鲨鱼,蜗牛,考拉,羽毛球,足球,乒乓球,高尔夫,保龄球,射箭,滑雪,篮球,帆船,举重,牛奶,土豆,月饼,栗子,米饭,披萨饼,西瓜,花生,橙子,黄瓜,眼镜,牙刷,钢笔,红绿灯,奶嘴,卫生间,钟表,蜡烛,放大镜,洗衣液,向日葵,柳树,玫瑰,荷花,竹子,松树,仙人掌,银杏树,菊花,牵牛花";
     wordsCN = [words1 componentsSeparatedByString:@","];
-    NSString *words2 = @"pig,cat,rabbit,chicken,frog,bee,dog,shark,snail,koala,badminton,football,table tennis,golf,bowling,archery,skiing,basketball,sailing,weighting,milk,potato,mooncake,chestnut,rice,pizza,watermelon,peanut,orange,cucumber,glasses,toothbrush,pen,traffic light,pacifier,toilet,clock,candle,magnifier,landry,sunflower,willow,rose,lotus,bamboo,pine,cactus,gingko,chrysanthemum,morning glory";
+    NSString *words2 = @"pig,cat,rabbit,chicken,frog,bee,dog,shark,snail,koala,badminton,football,table tennis,golf,bowling,archery,skiing,basketball,sailing,weightlifting,milk,potato,mooncake,chestnut,rice,pizza,watermelon,peanut,orange,cucumber,glasses,toothbrush,pen,traffic light,pacifier,toilet,clock,candle,magnifier,landry,sunflower,willow,rose,lotus,bamboo,pine,cactus,gingko,chrysanthemum,morning glory";
     wordsEN = [words2 componentsSeparatedByString:@","];
 
     NSString *backgroundNames = @"animalBackground";

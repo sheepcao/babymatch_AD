@@ -14,6 +14,8 @@
 		<string>https://github.com/sheepcao/completeImage.git</string>
 		<key>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</key>
 		<string>https://github.com/sheepcao/completeImage_charge.git</string>
+		<key>C547203BF2E9B4F366B2A044E78B8A855D67D109</key>
+		<string>https://github.com/sheepcao/babymatch_AD.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>babyJoint.xcodeproj</string>
@@ -22,14 +24,16 @@
 		<key>08E5C6F99B7AACE1548EEA98EE18140DAB8766AA</key>
 		<string>../../../completeImage</string>
 		<key>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</key>
+		<string>../../../completeImage_charge</string>
+		<key>C547203BF2E9B4F366B2A044E78B8A855D67D109</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/sheepcao/completeImage_charge.git</string>
+	<string>https://github.com/sheepcao/babymatch_AD.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</string>
+	<string>C547203BF2E9B4F366B2A044E78B8A855D67D109</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -47,6 +51,14 @@
 			<string>71AC8067D00A2E6D74B5CDF6AEFAEF076BD99DC0</string>
 			<key>IDESourceControlWCCName</key>
 			<string>completeImage_charge</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C547203BF2E9B4F366B2A044E78B8A855D67D109</string>
+			<key>IDESourceControlWCCName</key>
+			<string>completeImage_charge-master-4</string>
 		</dict>
 	</array>
 </dict>

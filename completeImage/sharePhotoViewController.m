@@ -210,8 +210,7 @@ UIView *tmpCustomView;
 
         }
 
-//        self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]]];
-       // [self.saveImage setHidden:NO];
+
 
         
     }else//未拍摄时的界面
@@ -219,7 +218,6 @@ UIView *tmpCustomView;
         if ([[UIScreen mainScreen] bounds].size.height == 480) {
             if ([CommonUtility isSystemLangChinese]) {
                 
-//                self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"notFinish460" ofType:@"png"]]];
                 UIGraphicsBeginImageContext(self.view.frame.size);
                 [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"notFinish460" ofType:@"png"]] drawInRect:self.view.bounds];
                 UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
