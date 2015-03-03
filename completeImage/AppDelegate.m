@@ -11,7 +11,10 @@
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
-
+#import "LARSAdController.h"
+#import "TOLAdAdapter.h"
+#import "TOLAdAdapteriAds.h"
+#import "TOLAdAdapterGoogleAds.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -22,7 +25,8 @@
     [MobClick setAppVersion:version];
     
     
-
+    [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapteriAds class]];
+    [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapterGoogleAds class] withPublisherId:ADMOB_ID];
     
     [ShareSDK registerApp:@"2a5d674d9a31"];
     [ShareSDK connectWeChatWithAppId:@"wx1fc1193034aff0b3" wechatCls:[WXApi class]];
@@ -156,9 +160,22 @@
      // TODO: Add your device/simulator test identifiers here. They are
      // printed to the console when the app is launched.
      nil];
-    
-    [request setBirthdayWithMonth:8 day:26 year:2010];
+        
+    [request setBirthday:[self dateFromString:@"2009"]];
     return request;
+}
+
+- (NSDate *)dateFromString:(NSString *)dateString{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat: @"yyyy"];
+    
+    
+    NSDate *destDate= [dateFormatter dateFromString:dateString];
+    
+    return destDate;
+    
 }
 
 @end

@@ -9,6 +9,8 @@
 #import "ViewController.h"
 //ad...big
 #import "AppDelegate.h"
+#import "LARSAdController.h"
+
 
 #define levelBtnWidth 66
 #define levelBtnHeight 81
@@ -230,27 +232,27 @@ bool levelLock[bigLevel];
     
     
 //set ad......iad and admob
-    if ([[UIScreen mainScreen] bounds].size.height == 568) {
-        self.iAdBannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
-        
-        [self.iAdBannerView setDelegate:self];
-        self.iAdBannerView.backgroundColor = [UIColor clearColor];
-        
-        [self.view addSubview:self.iAdBannerView];
-        self.bannerIsVisible = YES;
-        
-        self.gAdBannerView = [[GADBannerView alloc]
-                              initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
-        
-        self.gAdBannerView.adUnitID = ADMOB_ID;//调用id
-        
-        self.gAdBannerView.delegate = self;
-        self.gAdBannerView.rootViewController = self;
-        self.gAdBannerView.backgroundColor = [UIColor clearColor];
-        [self.gAdBannerView loadRequest:[GADRequest request]];
-        
-        
-    }
+//    if ([[UIScreen mainScreen] bounds].size.height == 568) {
+//        self.iAdBannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
+//        
+//        [self.iAdBannerView setDelegate:self];
+//        self.iAdBannerView.backgroundColor = [UIColor clearColor];
+//        
+//        [self.view addSubview:self.iAdBannerView];
+//        self.bannerIsVisible = YES;
+//        
+//        self.gAdBannerView = [[GADBannerView alloc]
+//                              initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
+//        
+//        self.gAdBannerView.adUnitID = ADMOB_ID;//调用id
+//        
+//        self.gAdBannerView.delegate = self;
+//        self.gAdBannerView.rootViewController = self;
+//        self.gAdBannerView.backgroundColor = [UIColor clearColor];
+//        [self.gAdBannerView loadRequest:[GADRequest request]];
+//        
+//        
+//    }
 
 
 }
@@ -286,8 +288,14 @@ bool levelLock[bigLevel];
     [UIView commitAnimations];
 }
 
-
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [[LARSAdController sharedManager] addAdContainerToViewInViewController:self];
+    
+    
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     
@@ -803,8 +811,8 @@ bool levelLock[bigLevel];
     NSString *message = nil;
     NSString *testShare = nil;
     if ([CommonUtility isSystemLangChinese]) {
-        message = @"宝贝,拼吧！\n亲子游戏悄然来袭！";
-        testShare = @"赶快下载《宝贝，拼吧！》\n来自星星的宝宝就是你！\nhttps://itunes.apple.com/cn/app/baby-match!/id915444234?l=zh&mt=8";
+        message = @"宝宝识图\n亲子游戏悄然来袭！";
+        testShare = @"赶快下载《宝宝识图》\n来自星星的宝宝就是你！\nhttps://itunes.apple.com/cn/app/baby-match!/id915444234?l=zh&mt=8";
         
     }else
     {

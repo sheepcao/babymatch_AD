@@ -750,7 +750,7 @@ UIView *tmpCustomView;
     NSString *message;
     
     if ([CommonUtility isSystemLangChinese]) {
-        message = @"宝贝,拼吧！\n下载地址 : https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8";
+        message = @"宝宝识图\n下载地址 : https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8";
     }else
     {
         message = @"Baby Match!\nDownload : https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8";

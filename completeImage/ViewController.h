@@ -13,8 +13,8 @@
 #import "sharePhotoViewController.h"
 #import "CustomIOS7AlertView.h"
 //ad...big
-#import "GADInterstitial.h"
-#import "GADInterstitialDelegate.h"
+#import "GoogleMobileAds/GADInterstitial.h"
+#import "GoogleMobileAds/GADInterstitialDelegate.h"
 
 
 #define P(x,y) CGPointMake(x, y)

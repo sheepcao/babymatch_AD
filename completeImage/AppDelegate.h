@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "globalVar.h"
-#import "GADInterstitial.h"
+#import "GoogleMobileAds/GADInterstitial.h"
 
 
 
