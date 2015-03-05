@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0BE582B3193F25FB00EEAB26"
-               BuildableName = "Baby Match!.app"
-               BlueprintName = "babyJoint"
-               ReferencedContainer = "container:babyJoint.xcodeproj">
+               BuildableName = "Flash Cards.app"
+               BlueprintName = "Flash Cards"
+               ReferencedContainer = "container:Flash Cards.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "0BE582D4193F25FB00EEAB26"
                BuildableName = "babyJointTests.xctest"
                BlueprintName = "babyJointTests"
-               ReferencedContainer = "container:babyJoint.xcodeproj">
+               ReferencedContainer = "container:Flash Cards.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "0BE582D4193F25FB00EEAB26"
                BuildableName = "babyJointTests.xctest"
                BlueprintName = "babyJointTests"
-               ReferencedContainer = "container:babyJoint.xcodeproj">
+               ReferencedContainer = "container:Flash Cards.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BE582B3193F25FB00EEAB26"
-            BuildableName = "Baby Match!.app"
-            BlueprintName = "babyJoint"
-            ReferencedContainer = "container:babyJoint.xcodeproj">
+            BuildableName = "Flash Cards.app"
+            BlueprintName = "Flash Cards"
+            ReferencedContainer = "container:Flash Cards.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BE582B3193F25FB00EEAB26"
-            BuildableName = "Baby Match!.app"
-            BlueprintName = "babyJoint"
-            ReferencedContainer = "container:babyJoint.xcodeproj">
+            BuildableName = "Flash Cards.app"
+            BlueprintName = "Flash Cards"
+            ReferencedContainer = "container:Flash Cards.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BE582B3193F25FB00EEAB26"
-            BuildableName = "Baby Match!.app"
-            BlueprintName = "babyJoint"
-            ReferencedContainer = "container:babyJoint.xcodeproj">
+            BuildableName = "Flash Cards.app"
+            BlueprintName = "Flash Cards"
+            ReferencedContainer = "container:Flash Cards.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -7,6 +7,7 @@
 //
 
 #import "teachingView.h"
+#import "globalVar.h"
 
 @implementation teachingView
 
@@ -37,6 +38,16 @@ SystemSoundID soundEN;
     self = [super init];
 
     if (self) {
+        CGFloat deviceOffside_size = 0;
+        CGFloat deviceOffside_w = 0;
+        CGFloat deviceOffside_h = 0;
+
+
+        if (IS_IPHONE_6) {
+            deviceOffside_size = 30;
+            deviceOffside_h = 5;
+            deviceOffside_w = 10;
+        }
         
         if ([[UIScreen mainScreen] bounds].size.height == 480) {
             
@@ -46,10 +57,11 @@ SystemSoundID soundEN;
             
         }else
         {
-            self.frame = CGRectMake(80, 70, 160, 120);
             
-            self.answerCN = [[UIButton alloc] initWithFrame:CGRectMake(15, 13, 140, 45)];
-            self.answerEN = [[UIButton alloc] initWithFrame:CGRectMake(15, 62, 140, 45)];
+            self.frame = CGRectMake(80+deviceOffside_w, 70+deviceOffside_h, 160+deviceOffside_size, 120);
+            
+            self.answerCN = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffside_size/2, 13, 140, 45)];
+            self.answerEN = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffside_size/2, 62, 140, 45)];
             
         }
         

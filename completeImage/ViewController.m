@@ -70,7 +70,58 @@ bool levelLock[bigLevel];
     
     int y = 0;
     
-    if ([[UIScreen mainScreen] bounds].size.height == 480) {
+    if(IS_IPHONE_5)
+    {
+        [self.view setFrame:CGRectMake(0, 0, 320, 568)];
+        self.animal = [[UIButton alloc] initWithFrame:CGRectMake(14, 75.5, levelBtnWidth, levelBtnHeight)];
+        self.sport = [[UIButton alloc] initWithFrame:CGRectMake(167, 95, levelBtnWidth, levelBtnHeight)];
+        self.food = [[UIButton alloc] initWithFrame:CGRectMake(31, 239+8, levelBtnWidth-3, levelBtnHeight-20)];
+        self.livingGood = [[UIButton alloc] initWithFrame:CGRectMake(134,239, levelBtnWidth-7, levelBtnHeight-7)];
+        self.plant = [[UIButton alloc] initWithFrame:CGRectMake(75, 389+4, levelBtnWidth-5, levelBtnHeight-5)];
+        self.moreFun = [[UIButton alloc] initWithFrame:CGRectMake(166, 385, levelBtnWidth-20, levelBtnHeight-25)];
+        self.aboutUs = [[UIButton alloc] initWithFrame:CGRectMake(248, 398, levelBtnWidth-30, levelBtnHeight-35)];
+        self.shareApp = [[UIButton alloc] initWithFrame:CGRectMake(228, 30, 60, 60)];
+        
+        self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(20, 25, 200, 41)];
+        self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210, 40, 40)];
+
+    }else if(IS_IPHONE_6P)
+    {
+        CGFloat distanceHeight = 35;
+        CGFloat distancewidth = 16;
+
+        
+        self.animal = [[UIButton alloc] initWithFrame:CGRectMake(14+distancewidth, 75.5+distanceHeight, levelBtnWidth, levelBtnHeight)];
+        self.sport = [[UIButton alloc] initWithFrame:CGRectMake(167+distancewidth*3.4, 95+distanceHeight*1.1, levelBtnWidth, levelBtnHeight)];
+        self.food = [[UIButton alloc] initWithFrame:CGRectMake(31+distancewidth, 239+8+distanceHeight*2.3, levelBtnWidth-3, levelBtnHeight-20)];
+        self.livingGood = [[UIButton alloc] initWithFrame:CGRectMake(134+distancewidth*3.2,239+distanceHeight*2.3, levelBtnWidth-7, levelBtnHeight-7)];
+        self.plant = [[UIButton alloc] initWithFrame:CGRectMake(75+distancewidth*2, 389+4+distanceHeight*3.7, levelBtnWidth-5, levelBtnHeight-5)];
+        self.moreFun = [[UIButton alloc] initWithFrame:CGRectMake(166+distancewidth*3.7, 385+distanceHeight*3.5, levelBtnWidth-20, levelBtnHeight-25)];
+        self.aboutUs = [[UIButton alloc] initWithFrame:CGRectMake(248+distancewidth*4.7, 398+distanceHeight*3.5, levelBtnWidth-30, levelBtnHeight-35)];
+        self.shareApp = [[UIButton alloc] initWithFrame:CGRectMake(228+distancewidth*6, 30+distanceHeight/2, 60, 60)];
+        
+        self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(20, 25, 200, 41)];
+        self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210+distanceHeight*2+3, 40, 40)];
+        
+    }else if(IS_IPHONE_6)
+    {
+        CGFloat distanceHeight = 19;
+        CGFloat distancewidth = 10;
+        
+        
+        self.animal = [[UIButton alloc] initWithFrame:CGRectMake(14+distancewidth, 75.5+distanceHeight, levelBtnWidth, levelBtnHeight)];
+        self.sport = [[UIButton alloc] initWithFrame:CGRectMake(167+distancewidth*3.4, 95+distanceHeight*1.1, levelBtnWidth, levelBtnHeight)];
+        self.food = [[UIButton alloc] initWithFrame:CGRectMake(31+distancewidth, 239+8+distanceHeight*2.3, levelBtnWidth-3, levelBtnHeight-20)];
+        self.livingGood = [[UIButton alloc] initWithFrame:CGRectMake(134+distancewidth*3.2,239+distanceHeight*2.3, levelBtnWidth-7, levelBtnHeight-7)];
+        self.plant = [[UIButton alloc] initWithFrame:CGRectMake(75+distancewidth*2, 389+4+distanceHeight*3.7, levelBtnWidth-5, levelBtnHeight-5)];
+        self.moreFun = [[UIButton alloc] initWithFrame:CGRectMake(166+distancewidth*3.7, 385+distanceHeight*3.5, levelBtnWidth-20, levelBtnHeight-25)];
+        self.aboutUs = [[UIButton alloc] initWithFrame:CGRectMake(248+distancewidth*4.7, 398+distanceHeight*3.5, levelBtnWidth-30, levelBtnHeight-35)];
+        self.shareApp = [[UIButton alloc] initWithFrame:CGRectMake(228+distancewidth*6, 30+distanceHeight/2, 60, 60)];
+        
+        self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(20, 25, 200, 41)];
+        self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210+distanceHeight*2+3, 40, 40)];
+        
+    }else {
         if ([CommonUtility isSystemVersionLessThan7]) {
             [self.view setFrame:CGRectMake(0, -20, 320, 480)];
             y=-13;
@@ -90,23 +141,8 @@ bool levelLock[bigLevel];
         
         self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(16, 10+y, 200, 41)];
         self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210-13+y, 40, 40)];
-
         
-    }else
-    {
-        [self.view setFrame:CGRectMake(0, 0, 320, 568)];
-        self.animal = [[UIButton alloc] initWithFrame:CGRectMake(14, 75.5, levelBtnWidth, levelBtnHeight)];
-        self.sport = [[UIButton alloc] initWithFrame:CGRectMake(167, 95, levelBtnWidth, levelBtnHeight)];
-        self.food = [[UIButton alloc] initWithFrame:CGRectMake(31, 239+8, levelBtnWidth-3, levelBtnHeight-20)];
-        self.livingGood = [[UIButton alloc] initWithFrame:CGRectMake(134,239, levelBtnWidth-7, levelBtnHeight-7)];
-        self.plant = [[UIButton alloc] initWithFrame:CGRectMake(75, 389+4, levelBtnWidth-5, levelBtnHeight-5)];
-        self.moreFun = [[UIButton alloc] initWithFrame:CGRectMake(166, 385, levelBtnWidth-20, levelBtnHeight-25)];
-        self.aboutUs = [[UIButton alloc] initWithFrame:CGRectMake(248, 398, levelBtnWidth-30, levelBtnHeight-35)];
-        self.shareApp = [[UIButton alloc] initWithFrame:CGRectMake(228, 30, 60, 60)];
         
-        self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(20, 25, 200, 41)];
-        self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210, 40, 40)];
-
     }
     self.animal.tag = 1;
     self.sport.tag = 2;
@@ -202,7 +238,7 @@ bool levelLock[bigLevel];
 
     self.game.stopDelegate = self;
 
-    UIImageView *homeBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+    UIImageView *homeBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         homeBackground.image = [UIImage imageNamed:@"level480"];
 
@@ -995,6 +1031,26 @@ bool levelLock[bigLevel];
     
 	UIBezierPath *trackPath = [UIBezierPath bezierPath];
 	
+    if (IS_IPHONE_6P) {
+        [trackPath moveToPoint:P(-30,self.movingSnail.frame.origin.y+15)];
+        
+        [trackPath addLineToPoint:P(30+10,self.movingSnail.frame.origin.y+2+15)];
+        
+        [trackPath addLineToPoint:P(110+36,self.movingSnail.frame.origin.y-15+20)];
+        [trackPath addLineToPoint:P(200+37,self.movingSnail.frame.origin.y+1+17)];
+        [trackPath addLineToPoint:P(280+42,self.movingSnail.frame.origin.y+1+16)];
+        [trackPath addLineToPoint:P(350+60,self.movingSnail.frame.origin.y-5+16)];
+    }else if(IS_IPHONE_6)
+    {
+        [trackPath moveToPoint:P(-30,self.movingSnail.frame.origin.y+15)];
+        
+        [trackPath addLineToPoint:P(30+7,self.movingSnail.frame.origin.y+2+15)];
+        
+        [trackPath addLineToPoint:P(110+25,self.movingSnail.frame.origin.y-15+20)];
+        [trackPath addLineToPoint:P(200+29,self.movingSnail.frame.origin.y+1+17)];
+        [trackPath addLineToPoint:P(280+33,self.movingSnail.frame.origin.y+1+16)];
+        [trackPath addLineToPoint:P(350+50,self.movingSnail.frame.origin.y-5+16)];
+    }else{
     [trackPath moveToPoint:P(-30,self.movingSnail.frame.origin.y+15)];
     
     [trackPath addLineToPoint:P(30,self.movingSnail.frame.origin.y+2+15)];
@@ -1003,6 +1059,7 @@ bool levelLock[bigLevel];
     [trackPath addLineToPoint:P(200,self.movingSnail.frame.origin.y+1+17)];
     [trackPath addLineToPoint:P(280,self.movingSnail.frame.origin.y+1+16)];
     [trackPath addLineToPoint:P(350,self.movingSnail.frame.origin.y-5+16)];
+    }
 
 	CALayer *car = [CALayer layer];
 	car.bounds = CGRectMake(0, 0, 40, 40);

@@ -69,11 +69,34 @@ NSMutableArray  *arrayGif;
     }
     NSLog(@"levelTop:%d,fixed:%d",levelTop,haveFixed[levelTop-1]);
     
-    self.answer1 = [[UIButton alloc] initWithFrame:CGRectMake(33, 450, 55, 55)];
-    self.answer1.tag = 1;
-    self.answer2 = [[UIButton alloc] initWithFrame:CGRectMake(131, 450, 55, 55)];
+    CGFloat deviceOffset_height=0;
+    CGFloat deviceOffset_width=0;
+    CGFloat deviceOffset_size=0;
+//    CGFloat deviceOffset_height=0;
+
+
+    
+    if (IS_IPHONE_6) {
+        
+        deviceOffset_height = 25;
+        deviceOffset_width = 20;
+        deviceOffset_size= 5;
+        
+
+
+        
+    }else if (IS_IPHONE_6P)
+    {
+        
+    }
+    
+    self.answer2 = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - (55+deviceOffset_size)/2, 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
     self.answer2.tag = 2;
-    self.answer3 = [[UIButton alloc] initWithFrame:CGRectMake(228, 450, 55, 55)];
+    
+    self.answer1 = [[UIButton alloc] initWithFrame:CGRectMake(self.answer2.frame.origin.x - 45 - (55+deviceOffset_size), 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
+    self.answer1.tag = 1;
+
+    self.answer3 = [[UIButton alloc] initWithFrame:CGRectMake(self.answer2.frame.origin.x + 45 + (55+deviceOffset_size), 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
     self.answer3.tag = 3;
 
     [self.answer1 setBackgroundImage:[UIImage imageNamed:@"choiceBackground"] forState:UIControlStateNormal];
@@ -96,9 +119,35 @@ NSMutableArray  *arrayGif;
         
     }else
     {
-        self.picture = [[UIImageView alloc] initWithFrame:CGRectMake(33, 190, 250, 230)];
-        self.animationBegin = [[UIButton alloc] initWithFrame:CGRectMake(33, 190, 250, 230)];
-        posY[level-1] +=1;
+        CGFloat pictureOffset_height=0;
+        CGFloat pictureOffset_width=0;
+
+
+        
+        if(IS_IPHONE_6)
+        {
+            pictureOffset_height=13;
+            pictureOffset_width=28;
+
+            for (int i = 0; i <MAXlevel; i++) {
+       
+                posY[i] +=(1+pictureOffset_height);
+                posX[i] +=pictureOffset_width;
+            }
+
+            
+            
+        }else if(IS_IPHONE_6P)
+        {
+        }
+        
+        self.picture = [[UIImageView alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250, 230)];
+        self.animationBegin = [[UIButton alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250, 230)];
+
+
+        
+        
+
     }
     [self.view addSubview:self.answer1];
     [self.view addSubview:self.answer2];
@@ -143,11 +192,22 @@ NSMutableArray  *arrayGif;
     
 //     self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"animalBackground" ofType:@"png"]]];
     
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"animalBackground" ofType:@"png"]] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+//    UIGraphicsBeginImageContext(self.view.frame.size);
+//    [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"animalBackground" ofType:@"png"]] drawInRect:self.view.bounds];
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+    
+    UIImageView *gameBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+
+    gameBackground.image = [UIImage imageNamed:@"animalBackground"];
+    
+    [self.view addSubview:gameBackground];
+    [self.view sendSubviewToBack:gameBackground];
+
+    
+
+    
 
     
   //set...iad and admob
@@ -185,10 +245,33 @@ NSMutableArray  *arrayGif;
     
 }
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    NSLog(@"viewDidLayoutSubviews");
+    if (IS_IPHONE_6) {
+        CGPoint priorBtnCenter = self.priorButton.center;
+        priorBtnCenter.y += 17;
+        priorBtnCenter.x += 10;
+        [self.priorButton setCenter:priorBtnCenter];
+        
+        CGPoint nextBtnCenter = self.nextButton.center;
+        nextBtnCenter.y += 17;
+        nextBtnCenter.x += 40;
+        [self.nextButton setCenter:nextBtnCenter];
+    }
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated
 
 {
     [MobClick beginLogPageView:@"gamePage"];
+    
+
+    
+
+    
     //ad.....big
     if (ADTimer ==nil) {
         
@@ -208,6 +291,7 @@ NSMutableArray  *arrayGif;
     for (int i =0; i<3; i++) {
         [self setButton:(UIButton *)self.choices[i]];
     }
+
     
     
     self.myImg = [[uncompleteImage alloc] initWithEmptyX:posX[level-1] Y:posY[level-1]];
@@ -444,6 +528,8 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     
     [self setImages:an1:an2 :an3 :pic];
 
+    CGFloat sizeOffside = 0;
+
     
     if (level%10 == 9) {
         [self.empty setFrame:CGRectMake(px, py, largeEmpty[(level-1)/10], largeEmpty[(level-1)/10])];
@@ -453,9 +539,9 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     }else
     {
    
-        [self.empty setFrame:CGRectMake(px, py, 55, 55)];
+        [self.empty setFrame:CGRectMake(px, py, 55+sizeOffside, 55+sizeOffside)];
         
-        [self.questionMark setFrame:CGRectMake(0, 0, 55, 55)];
+        [self.questionMark setFrame:CGRectMake(0, 0, 55+sizeOffside, 55+sizeOffside)];
     }
     if(level ==16)
     {
@@ -894,11 +980,14 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 -(void)changeImgs
 {
     
+    
     if (haveFixed[level-1]) {
         
         if (level<MAXlevel) {
             level++;
             notJumpOver = NO;
+            
+
 
             [self.myImg setEmptyX:posX[level-1] Y:posY[level-1]];
             [self setupWithEmptyPosition:self.myImg.positionX :self.myImg.positionY];

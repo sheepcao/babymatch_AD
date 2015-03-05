@@ -854,7 +854,7 @@
 		0BDBD803194EC8BB00643495 /* teachingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = teachingView.h; sourceTree = "<group>"; };
 		0BDBD804194EC8BB00643495 /* teachingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = teachingView.m; sourceTree = "<group>"; };
 		0BE28974195B259000E412D5 /* globalVar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = globalVar.h; sourceTree = "<group>"; };
-		0BE582B4193F25FB00EEAB26 /* Baby Match!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baby Match!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BE582B4193F25FB00EEAB26 /* Flash Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flash Cards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BE582B7193F25FB00EEAB26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0BE582B9193F25FB00EEAB26 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		0BE582BB193F25FB00EEAB26 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1351,7 +1351,7 @@
 		0BE582B5193F25FB00EEAB26 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0BE582B4193F25FB00EEAB26 /* Baby Match!.app */,
+				0BE582B4193F25FB00EEAB26 /* Flash Cards.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1807,9 +1807,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0BE582B3193F25FB00EEAB26 /* babyJoint */ = {
+		0BE582B3193F25FB00EEAB26 /* Flash Cards */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0BE582E6193F25FB00EEAB26 /* Build configuration list for PBXNativeTarget "babyJoint" */;
+			buildConfigurationList = 0BE582E6193F25FB00EEAB26 /* Build configuration list for PBXNativeTarget "Flash Cards" */;
 			buildPhases = (
 				0BE582B0193F25FB00EEAB26 /* Sources */,
 				0BE582B1193F25FB00EEAB26 /* Frameworks */,
@@ -1819,9 +1819,9 @@
 			);
 			dependencies = (
 			);
-			name = babyJoint;
+			name = "Flash Cards";
 			productName = completeImage;
-			productReference = 0BE582B4193F25FB00EEAB26 /* Baby Match!.app */;
+			productReference = 0BE582B4193F25FB00EEAB26 /* Flash Cards.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1838,7 +1838,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0BE582AF193F25FB00EEAB26 /* Build configuration list for PBXProject "babyJoint" */;
+			buildConfigurationList = 0BE582AF193F25FB00EEAB26 /* Build configuration list for PBXProject "Flash Cards" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1852,7 +1852,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0BE582B3193F25FB00EEAB26 /* babyJoint */,
+				0BE582B3193F25FB00EEAB26 /* Flash Cards */,
 			);
 		};
 /* End PBXProject section */
@@ -2382,7 +2382,7 @@
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PROVISIONING_PROFILE = "2ed29fff-d90a-4b1e-850d-1b4ba8ff9a93";
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -2420,7 +2420,7 @@
 				PROVISIONING_PROFILE = "c9e6c043-b696-4c96-bc2e-c05bb350f190";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};
@@ -2461,10 +2461,10 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
-				PRODUCT_NAME = "Baby Match!";
+				PRODUCT_NAME = "Flash Cards";
 				PROVISIONING_PROFILE = "7d29ee04-3218-4cd3-b0bf-28a14b455fc8";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2506,10 +2506,10 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
-				PRODUCT_NAME = "Baby Match!";
-				PROVISIONING_PROFILE = "c9e6c043-b696-4c96-bc2e-c05bb350f190";
+				PRODUCT_NAME = "Flash Cards";
+				PROVISIONING_PROFILE = "78595dfa-6614-444a-bfe8-b218a2df60a0";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2517,7 +2517,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0BE582AF193F25FB00EEAB26 /* Build configuration list for PBXProject "babyJoint" */ = {
+		0BE582AF193F25FB00EEAB26 /* Build configuration list for PBXProject "Flash Cards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0BE582E4193F25FB00EEAB26 /* Debug */,
@@ -2526,7 +2526,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0BE582E6193F25FB00EEAB26 /* Build configuration list for PBXNativeTarget "babyJoint" */ = {
+		0BE582E6193F25FB00EEAB26 /* Build configuration list for PBXNativeTarget "Flash Cards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0BE582E7193F25FB00EEAB26 /* Debug */,
