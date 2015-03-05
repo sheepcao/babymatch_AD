@@ -825,7 +825,7 @@ bool levelLock[bigLevel];
                                        defaultContent: testShare
                                                 image:[ShareSDK pngImageWithImage:imageShare]
                                                 title:message
-                                                 url:@"https://itunes.apple.com/cn/app/baby-match!/id915444234?l=zh&mt=8"
+                                                 url:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"
                                           description: testShare
                                             mediaType:SSPublishContentMediaTypeNews];
     
