@@ -328,7 +328,7 @@ bool levelLock[bigLevel];
         UIButton *levelEntrance = (UIButton *)[self.view viewWithTag:(i+1)];
 
 
-        
+
         if (i>(levelTop-1)/10) {
             
             levelLock[i] = YES;
@@ -344,6 +344,9 @@ bool levelLock[bigLevel];
         }
        
         if (levelTop == 21) {
+            
+            levelLock[2] = YES;
+
             
             UIButton *levelEntrance3 = (UIButton *)[self.view viewWithTag:3];
             [levelEntrance3 addSubview:self.lockImg[2]];
