@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "WeiboSDK.h"
-#import "WXApi.h"
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <TencentOpenAPI/TencentOAuth.h>
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialFacebookHandler.h"
+//#import <TencentOpenAPI/QQApiInterface.h>
+//#import <TencentOpenAPI/TencentOAuth.h>
 #import "LARSAdController.h"
 #import "TOLAdAdapter.h"
 #import "TOLAdAdapteriAds.h"
@@ -28,20 +30,33 @@
     [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapteriAds class]];
     [[LARSAdController sharedManager] registerAdClass:[TOLAdAdapterGoogleAds class] withPublisherId:ADMOB_ID];
     
-    [ShareSDK registerApp:@"2a5d674d9a31"];
-    [ShareSDK connectWeChatWithAppId:@"wx1fc1193034aff0b3" wechatCls:[WXApi class]];
+    
+    //share Umeng
+    [UMSocialData setAppKey:@"53f866f1fd98c5860a021da6"];
+    
+    [UMSocialSinaHandler openSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    [UMSocialWechatHandler setWXAppId:@"wx1fc1193034aff0b3" appSecret:@"b91d4920d398f6f3b458aafc3da6822b" url:nil];
+    
+    [UMSocialQQHandler setQQWithAppId:@"1102040569" appKey:@"Mwz2RaYqfPrB2wit" url:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"];
+    [UMSocialFacebookHandler setFacebookAppID:@"1611763795722806" shareFacebookWithURL:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"];
+
+    
+
+    
+//    [ShareSDK registerApp:@"2a5d674d9a31"];
+//    [ShareSDK connectWeChatWithAppId:@"wx1fc1193034aff0b3" wechatCls:[WXApi class]];
 //    [ShareSDK  connectSinaWeiboWithAppKey:@"2794760105"
 //                                appSecret:@"31dbf958ccc3fa37f6e99cf0ec643c5e"
 //                              redirectUri:@"https://www.weibo.com/"
 //                              weiboSDKCls:[WeiboSDK class]];
-    [ShareSDK connectSinaWeiboWithAppKey:@"95235141"
-                               appSecret:@"2d339cf5298113495027af71a57b1ace"
-                             redirectUri:@"https://api.weibo.com/oauth2/default.html"];
+//    [ShareSDK connectSinaWeiboWithAppKey:@"95235141"
+//                               appSecret:@"2d339cf5298113495027af71a57b1ace"
+//                             redirectUri:@"https://api.weibo.com/oauth2/default.html"];
 
     
 
     
-    [ShareSDK connectQQWithAppId:@"1102040569" qqApiCls:[QQApi class]];
+//    [ShareSDK connectQQWithAppId:@"1102040569" qqApiCls:[QQApi class]];
 //    [ShareSDK connectQZoneWithAppKey:@"1102040569"
 //                           appSecret:@"Mwz2RaYqfPrB2wit"
 //                   qqApiInterfaceCls:[QQApiInterface class]
@@ -49,8 +64,8 @@
 //    [ShareSDK connectQZoneWithAppKey:@"1102040569"
 //appSecret:@"Mwz2RaYqfPrB2wit"];
     
-    [ShareSDK connectFacebookWithAppKey:@"740494742652429"
-                              appSecret:@"463d6c586ea5786af2afdecada8c7cb2"];
+//    [ShareSDK connectFacebookWithAppKey:@"740494742652429"
+//                              appSecret:@"463d6c586ea5786af2afdecada8c7cb2"];
     
     
     
@@ -131,23 +146,17 @@
 }
 
 
-- (BOOL)application:(UIApplication *)application  handleOpenURL:(NSURL *)url
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [ShareSDK handleOpenURL:url
-                        wxDelegate:self];
+    return  [UMSocialSnsService handleOpenURL:url];
 }
-
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    return [ShareSDK handleOpenURL:url
-                 sourceApplication:sourceApplication
-                        annotation:annotation
-                        wxDelegate:self];
+    return  [UMSocialSnsService handleOpenURL:url];
 }
-
 
 - (GADRequest *)createRequest {
     

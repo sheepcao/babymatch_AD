@@ -19,9 +19,11 @@
 #import "GoogleMobileAds/GADBannerView.h"
 #define ADMOB_ID @"ca-app-pub-3074684817942615/4079653086"
 #define ADMOB_ID_DaysInLine @"ca-app-pub-3074684817942615/1126186689"
-#import <ShareSDK/ShareSDK.h>
+//#import <ShareSDK/ShareSDK.h>
 #import "CommonUtility.h"
 #import "MobClick.h"
+#import "UMSocial.h"
+
 
 int level ;
 NSNumber *levelSaved;

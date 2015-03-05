@@ -40,10 +40,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>wb</string>
+			<string>weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb95235141</string>
+				<string>sina.53f866f1fd98c5860a021da6</string>
 			</array>
 		</dict>
 		<dict>
@@ -53,7 +53,7 @@
 			<string>fb</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb740494742652429</string>
+				<string>fb1611763795722806</string>
 			</array>
 		</dict>
 		<dict>

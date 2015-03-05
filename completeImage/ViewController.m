@@ -545,12 +545,12 @@ bool levelLock[bigLevel];
     if([[self currentLanguage] compare:@"zh-Hans" options:NSCaseInsensitiveSearch]==NSOrderedSame || [[self currentLanguage] compare:@"zh-Hant" options:NSCaseInsensitiveSearch]==NSOrderedSame)
     {
         NSLog(@"current Language == Chinese");
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/baby-match!/id915444234?l=zh&mt=8"]];
         
         
     }else{
         NSLog(@"current Language == English");
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/baby-match!/id915444234?l=en&mt=8"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/baby-match!/id915444234?l=en&mt=8"]];
         
     }
 
@@ -791,66 +791,47 @@ bool levelLock[bigLevel];
 -(void)shareFunc
 {
     
-
-    
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
-                                                         allowCallback:NO
-                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
-                                                          viewDelegate:nil
-                                               authManagerViewDelegate:nil];
-    
-    [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"clcstudio@163.com"],
-                                    SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
-                                    nil]];
-
-
-    
     
     UIImage *imageShare = [UIImage imageNamed:@"appIcon"];
     NSString *message = nil;
     NSString *testShare = nil;
     if ([CommonUtility isSystemLangChinese]) {
-        message = @"宝宝识图\n亲子游戏悄然来袭！";
-        testShare = @"赶快下载《宝宝识图》\n来自星星的宝宝就是你！\nhttps://itunes.apple.com/cn/app/baby-match!/id915444234?l=zh&mt=8";
+        message = @"宝宝识图-中英双语看图识字&动画卡片\n亲子游戏悄然来袭！";
+        testShare = @"赶快下载《宝宝识图》\n来自星星的宝宝就是你！\nhttps://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
         
     }else
     {
-        message = @"BabyMatch!\nA fantastic parent-child game.";
-        testShare = @"Download <BabyMatch!>.\n You’re the Baby from the Star!\nhttps://itunes.apple.com/en/app/baby-match!/id915444234?l=en&mt=8";
+        message = @"Flash Cards-Talk&Active\nA fantastic parent-child game.";
+        testShare = @"Download <BabyMatch!>.\n You’re the Baby from the Star!\nhttps://itunes.apple.com/us/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
     }
     
-        //构造分享内容
-   id<ISSContent> publishContent = [ShareSDK content: testShare
-                                       defaultContent: testShare
-                                                image:[ShareSDK pngImageWithImage:imageShare]
-                                                title:message
-                                                 url:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"
-                                          description: testShare
-                                            mediaType:SSPublishContentMediaTypeNews];
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"53f866f1fd98c5860a021da6"
+                                      shareText:message
+                                     shareImage:imageShare
+                                shareToSnsNames:@[UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToQQ,UMShareToQzone]
+                                       delegate:(id)self];
     
-    [ShareSDK showShareActionSheet:nil
-                         shareList:nil
-                           content:publishContent
-                     statusBarTips:NO
-                       authOptions:authOptions
-                      shareOptions: nil
-                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                if (state == SSResponseStateSuccess)
-                                {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tips" message:@"Success!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                    [alert show];
-                                }
-                                else if (state == SSResponseStateFail)
-                                {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tips" message:[NSString stringWithFormat:@"Failed! \n%@", [error errorDescription]]delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                    [alert show];
-                                    
-                                }
-                            }];
+    // music url
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"];
+    
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = @"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
+    [UMSocialData defaultData].extConfig.qqData.url = @"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
+    [UMSocialData defaultData].extConfig.qzoneData.url = @"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
     
   
 }
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+}
+
 
 -(void)aboutUsTapped
 {
