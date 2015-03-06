@@ -89,7 +89,9 @@ NSMutableArray  *arrayGif;
         
     }else if (IS_IPHONE_6P)
     {
-        
+        deviceOffset_height = 35;
+        deviceOffset_width = 20;
+        deviceOffset_size= 8;
     }
     
     self.answer2 = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - (55+deviceOffset_size)/2, 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
@@ -141,6 +143,14 @@ NSMutableArray  *arrayGif;
             
         }else if(IS_IPHONE_6P)
         {
+            pictureOffset_height=40;
+            pictureOffset_width=48;
+            
+            for (int i = 0; i <MAXlevel; i++) {
+                
+                posY[i] +=(1+pictureOffset_height);
+                posX[i] +=pictureOffset_width;
+            }
         }
         
         self.picture = [[UIImageView alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250, 230)];
@@ -257,7 +267,43 @@ NSMutableArray  *arrayGif;
         levelCountCenter.x += 28;
         [self.levelCount setCenter:levelCountCenter];
         
+    }else if (IS_IPHONE_6P) {
+        CGPoint priorBtnCenter = self.priorButton.center;
+        priorBtnCenter.y += 30;
+        priorBtnCenter.x += 12;
+        [self.priorButton setCenter:priorBtnCenter];
+        
+        CGPoint nextBtnCenter = self.nextButton.center;
+        nextBtnCenter.y += 30;
+        nextBtnCenter.x += 80;
+        [self.nextButton setCenter:nextBtnCenter];
+        
+        CGSize backBtnSize = self.backButton.frame.size;
+        backBtnSize.width +=5  ;
+        backBtnSize.height +=3;
+        CGPoint backButtonCenter = self.backButton.center;
+        backButtonCenter.y += 5;
+        backButtonCenter.x += 5;
+        [self.backButton setCenter:backButtonCenter];
+        
+        CGSize shareBtnSize = self.shareBtn.frame.size;
+        shareBtnSize.width +=5  ;
+        shareBtnSize.height +=3;
+        CGPoint shareBtnCenter = self.shareBtn.center;
+        shareBtnCenter.y += 3;
+        shareBtnCenter.x += 90;
+        [self.shareBtn setCenter:shareBtnCenter];
+        
+        CGSize levelCountSize = self.levelCount.frame.size;
+        levelCountSize.width +=5  ;
+        levelCountSize.height +=5;
+        CGPoint levelCountCenter = self.levelCount.center;
+        levelCountCenter.y += 10;
+        levelCountCenter.x += 47;
+        [self.levelCount setCenter:levelCountCenter];
+        
     }
+    
     
 }
 
@@ -866,6 +912,11 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
         deviceOffside_size = 30;
         deviceOffside_h = 5;
         deviceOffside_w = 10;
+    }else if(IS_IPHONE_6P)
+    {
+        deviceOffside_size = 40;
+        deviceOffside_h = 28;
+        deviceOffside_w = 24;
     }
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {

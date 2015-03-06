@@ -40,6 +40,11 @@
         deviceOffset_height = 35;
         deviceOffset_width = 24;
         deviceOffset_size= 5;
+    }else if(IS_IPHONE_6P)
+    {
+        deviceOffset_height = 60;
+        deviceOffset_width = 42;
+        deviceOffset_size= 7;
     }
     
     [goAppstore setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2-70,100+deviceOffset_size , 51+deviceOffset_size)];

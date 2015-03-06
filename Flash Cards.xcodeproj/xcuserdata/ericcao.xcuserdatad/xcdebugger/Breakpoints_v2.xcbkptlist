@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "completeImage/gameLevelController.m"
-            timestampString = "447301116.960598"
+            timestampString = "447323687.385541"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>

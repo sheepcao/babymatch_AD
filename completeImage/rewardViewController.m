@@ -272,6 +272,9 @@ UIView *tmpCustomView;
     CGFloat offside = 0;
     if (IS_IPHONE_6) {
         offside = 20;
+    }else if(IS_IPHONE_6P)
+    {
+        offside = 30;
     }
     
     self.babyRewordImg.transform = CGAffineTransformIdentity;

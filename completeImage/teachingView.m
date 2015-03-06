@@ -47,6 +47,11 @@ SystemSoundID soundEN;
             deviceOffside_size = 30;
             deviceOffside_h = 5;
             deviceOffside_w = 10;
+        }else if(IS_IPHONE_6P)
+        {
+            deviceOffside_size = 40;
+            deviceOffside_h = 28;
+            deviceOffside_w = 24;
         }
         
         if ([[UIScreen mainScreen] bounds].size.height == 480) {
