@@ -52,7 +52,15 @@
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         
-        [fullScreen setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"aboutUs460" ofType:@"png"]]];
+        if ([CommonUtility isSystemLangChinese]) {
+            
+            [fullScreen setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"aboutUs460" ofType:@"png"]]];
+            
+        }else
+        {
+            [fullScreen setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"en-aboutUs460" ofType:@"png"]]];
+            
+        }
 
     
     }else

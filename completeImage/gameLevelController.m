@@ -82,6 +82,8 @@ NSMutableArray  *arrayGif;
         deviceOffset_width = 20;
         deviceOffset_size= 5;
         
+        
+        
 
 
         
@@ -189,14 +191,7 @@ NSMutableArray  *arrayGif;
 
     [arrayGif addObject:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"透明" ofType:@"png"]]];
 
-    
-//     self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"animalBackground" ofType:@"png"]]];
-    
-//    UIGraphicsBeginImageContext(self.view.frame.size);
-//    [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"animalBackground" ofType:@"png"]] drawInRect:self.view.bounds];
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+
     
     UIImageView *gameBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
 
@@ -210,29 +205,7 @@ NSMutableArray  *arrayGif;
     
 
     
-  //set...iad and admob
-//    if ([[UIScreen mainScreen] bounds].size.height == 568) {
-//        self.iAdBannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
-//        
-//        [self.iAdBannerView setDelegate:self];
-//        self.iAdBannerView.backgroundColor = [UIColor clearColor];
-//        
-//        [self.view addSubview:self.iAdBannerView];
-//        self.bannerIsVisible = YES;
-//        
-//        self.gAdBannerView = [[GADBannerView alloc]
-//                              initWithFrame:CGRectMake(0.0,self.view.frame.size.height - GAD_SIZE_320x50.height,GAD_SIZE_320x50.width,GAD_SIZE_320x50.height)];
-//        
-//        self.gAdBannerView.adUnitID = ADMOB_ID;//调用id
-//        
-//        self.gAdBannerView.delegate = self;
-//        self.gAdBannerView.rootViewController = self;
-//        self.gAdBannerView.backgroundColor = [UIColor clearColor];
-//        [self.gAdBannerView loadRequest:[GADRequest request]];
-//        
-//        
-//    }
-    
+
 
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -259,6 +232,31 @@ NSMutableArray  *arrayGif;
         nextBtnCenter.y += 17;
         nextBtnCenter.x += 40;
         [self.nextButton setCenter:nextBtnCenter];
+        
+        CGSize backBtnSize = self.backButton.frame.size;
+        backBtnSize.width +=5  ;
+        backBtnSize.height +=3;
+        CGPoint backButtonCenter = self.backButton.center;
+        backButtonCenter.y += 3;
+        backButtonCenter.x += 5;
+        [self.backButton setCenter:backButtonCenter];
+        
+        CGSize shareBtnSize = self.shareBtn.frame.size;
+        shareBtnSize.width +=5  ;
+        shareBtnSize.height +=3;
+        CGPoint shareBtnCenter = self.shareBtn.center;
+        shareBtnCenter.y += 3;
+        shareBtnCenter.x += 55;
+        [self.shareBtn setCenter:shareBtnCenter];
+        
+        CGSize levelCountSize = self.levelCount.frame.size;
+        levelCountSize.width +=5  ;
+        levelCountSize.height +=5;
+        CGPoint levelCountCenter = self.levelCount.center;
+        levelCountCenter.y += 5;
+        levelCountCenter.x += 28;
+        [self.levelCount setCenter:levelCountCenter];
+        
     }
     
 }
@@ -861,19 +859,27 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
         [self.teachView removeFromSuperview];
     }
     
+    CGFloat deviceOffside_size = 0;
+    CGFloat deviceOffside_w = 0;
+    CGFloat deviceOffside_h = 0;
+    if (IS_IPHONE_6) {
+        deviceOffside_size = 30;
+        deviceOffside_h = 5;
+        deviceOffside_w = 10;
+    }
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         
             self.wrongLabel = [[UIImageView alloc] initWithFrame:CGRectMake(80, 60, 160, 100)];
     }else
     {
-        self.wrongLabel = [[UIImageView alloc] initWithFrame:CGRectMake(80, 70, 160, 120)];
+        self.wrongLabel = [[UIImageView alloc] initWithFrame:CGRectMake(80+deviceOffside_w, 70+deviceOffside_h, 160+deviceOffside_size, 120)];
     }
 
     [self.wrongLabel setImage:[UIImage imageNamed:@"board" ]];
     [self.wrongLabel setContentMode:UIViewContentModeScaleToFill];
 
-    UIImageView *cryFace = [[UIImageView alloc] initWithFrame:CGRectMake(45, 15, 65, 65)];
+    UIImageView *cryFace = [[UIImageView alloc] initWithFrame:CGRectMake(self.wrongLabel.frame.size.width/2-65/2, 15, 65, 65)];
     cryFace.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wrongImg" ofType:@"png"]];
     [self.wrongLabel addSubview:cryFace];
     [self.view addSubview:self.wrongLabel];

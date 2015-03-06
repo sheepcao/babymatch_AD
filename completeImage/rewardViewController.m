@@ -76,11 +76,11 @@ UIView *tmpCustomView;
     // Do any additional setup after loading the view from its nib.
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         if ([CommonUtility isSystemVersionLessThan7]) {
-            [self.view setFrame:CGRectMake(0, -20, 320, 480)];
+            [self.view setFrame:CGRectMake(0, -20, SCREEN_WIDTH, 480)];
             
         }else
         {
-            [self.view setFrame:CGRectMake(0, 0, 320, 480)];
+            [self.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 480)];
             
            
         }
@@ -88,7 +88,7 @@ UIView *tmpCustomView;
         
     }else
     {
-        [self.view setFrame:CGRectMake(0, 0, 320, 568)];
+//        [self.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 568)];
     }
     
     if ([CommonUtility isSystemLangChinese]) {
@@ -101,11 +101,13 @@ UIView *tmpCustomView;
         [self.backBtn setImage:[UIImage imageNamed:@"returnTappedEN"] forState:UIControlStateHighlighted];
     }
     
-    self.shareView = [[UIView alloc] initWithFrame:CGRectMake(0, IPhoneHeight*60/568, 320, IPhoneHeight - IPhoneHeight*73/568 - IPhoneHeight*60/568)];
+    self.babyRewordImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-170)/2, SCREEN_HEIGHT+100, 170, 170)];
+    [self.view addSubview:self.babyRewordImg];
+    self.shareView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT*60/568, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT*73/568 - SCREEN_HEIGHT*60/568)];
     self.shareView.backgroundColor = [UIColor clearColor];
     
-    self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0 , 0, 320, self.shareView.frame.size.height)];
-    self.backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -IPhoneHeight*60/568, 320, 426)];
+    self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0 , 0, SCREEN_WIDTH, self.shareView.frame.size.height)];
+    self.backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -SCREEN_HEIGHT*60/568, SCREEN_WIDTH, 426)];
     self.rewardImage = [[UIImageView alloc] initWithFrame:CGRectMake(-300,-300,300 ,300)];//frame for animation.
     
     [self.frontImage setClipsToBounds:YES];
@@ -121,12 +123,39 @@ UIView *tmpCustomView;
     [self.shareView addSubview:self.rewardImage];
     [self.shareView bringSubviewToFront:self.rewardImage];
     
+    CGFloat deviceOffset_height=0;
+    CGFloat deviceOffset_width=0;
+    CGFloat deviceOffset_size=0;
+    //    CGFloat deviceOffset_height=0;
+    
+    
+    if (IS_IPHONE_6) {
+        
+        deviceOffset_height = 70;
+        deviceOffset_width = 10;
+        deviceOffset_size= 5;
+        
+        //       [self.photograph setImage:[UIImage imageNamed:@"错误答案"] forState:UIControlStateNormal];
+        
+        
+        
+        
+        
+    }else if (IS_IPHONE_6P)
+    {
+        deviceOffset_height = 120;
+        deviceOffset_width = 15;
+        deviceOffset_size= 7;
+        
+    }
+    
+
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         self.share = [[UIButton alloc] initWithFrame:CGRectMake(125, 395, 70, 70)];
         self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 395, 70, 70)];
         self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(243, 408, 50, 50)];
-        self.backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+        self.backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 460)];
         [self.backgroundImg setImage:[UIImage imageNamed: @"rewardPage460"]];
         
         self.babyTextImg = [[UIImageView alloc] initWithFrame:CGRectMake(50, 169, 220, 125)];
@@ -134,13 +163,13 @@ UIView *tmpCustomView;
         
     }else
     {
-        self.share = [[UIButton alloc] initWithFrame:CGRectMake(125, 490, 80, 80)];
-        self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 490, 80, 80)];
-        self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(243, 498, 60, 60)];
-        self.backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        self.share = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-(80+deviceOffset_size)/2, SCREEN_HEIGHT-80-deviceOffset_size, 80+deviceOffset_size, 80+deviceOffset_size)];
+        self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10+deviceOffset_width, SCREEN_HEIGHT-80-deviceOffset_size, 80+deviceOffset_size, 80+deviceOffset_size)];
+        self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-20-(60+deviceOffset_size)-deviceOffset_width, SCREEN_HEIGHT-70-deviceOffset_size, 60+deviceOffset_size, 60+deviceOffset_size)];
+        self.backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [self.backgroundImg setImage:[UIImage imageNamed: @"rewardPage"]];
-        self.babyTextImg = [[UIImageView alloc] initWithFrame:CGRectMake(40, 209, 240, 134)];
-        self.goCamera = [[UIButton alloc] initWithFrame:CGRectMake(92, 380, 139, 96)];
+        self.babyTextImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-240)/2, 209+deviceOffset_height/2, 240, 134)];
+        self.goCamera = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 70, 380+deviceOffset_height, 139, 96)];
 
 
     }
@@ -210,6 +239,7 @@ UIView *tmpCustomView;
     NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(goBigSmall) object:nil];
     
     [thread start];
+//    [self goBigSmall];
 
     
 
@@ -217,10 +247,10 @@ UIView *tmpCustomView;
 -(void)goBigSmall
 {
     self.babyRewordImg.transform = CGAffineTransformIdentity;
-    [UIView beginAnimations:@"bigsmall"context:nil];
+    [UIView beginAnimations:@"big"context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:2.5];
-    self.babyRewordImg.frame=CGRectMake(-10 , 160, 340, 340);
+    self.babyRewordImg.frame=CGRectMake(0 , 180, SCREEN_WIDTH, SCREEN_WIDTH);
     [UIView setAnimationDidStopSelector:@selector(gosmall)];
     [UIView commitAnimations];
     
@@ -239,17 +269,21 @@ UIView *tmpCustomView;
 }
 -(void)gosmall
 {
+    CGFloat offside = 0;
+    if (IS_IPHONE_6) {
+        offside = 20;
+    }
     
     self.babyRewordImg.transform = CGAffineTransformIdentity;
     [UIView beginAnimations:@"small"context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:0.3];
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
-        self.babyRewordImg.frame=CGRectMake(90 , 54, 140, 140);
+        self.babyRewordImg.frame=CGRectMake((SCREEN_WIDTH-140)/2 , 55, 140, 140);
 
     }else
     {
-        self.babyRewordImg.frame=CGRectMake(75 , 62, 170, 170);
+        self.babyRewordImg.frame=CGRectMake((SCREEN_WIDTH-170)/2 , 62+offside, 170, 170);
 
     }
     [UIView setAnimationDidStopSelector:@selector(fadeIn)];
@@ -346,7 +380,7 @@ UIView *tmpCustomView;
 
     [MobClick beginLogPageView:@"rewardPage"];
     
-    [self.babyRewordImg setFrame:CGRectMake(75, 568, 170, 170)];
+    [self.babyRewordImg setFrame:CGRectMake((SCREEN_WIDTH-170)/2, SCREEN_HEIGHT+100, 170, 170)];
 
 
     if ([CommonUtility isSystemLangChinese]) {
@@ -379,7 +413,7 @@ UIView *tmpCustomView;
         
         if ([[UIScreen mainScreen] bounds].size.height == 480) {
 
-            UIImageView *bottombar = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-IPhoneHeight*73/568-20, 320, IPhoneHeight*73/568)];
+            UIImageView *bottombar = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-SCREEN_HEIGHT*73/568-20, SCREEN_WIDTH, SCREEN_HEIGHT*73/568)];
             [bottombar setImage:[UIImage imageNamed:@"bottomImage"]];
             [self.view addSubview:bottombar];
 //            [self.view bringSubviewToFront:bottombar];
@@ -473,11 +507,11 @@ UIView *tmpCustomView;
     //  [UIApplication sharedApplication].statusBarHidden = YES;
     if([CommonUtility isSystemVersionLessThan7])
     {
-        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, IPhoneHeight)];
+        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         
     }else
     {
-        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, IPhoneHeight+20)];
+        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         
     }
     
@@ -493,21 +527,33 @@ UIView *tmpCustomView;
         self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(250, 10, 40, 32)];
     }else
     {
-        [self.SharePhotoView setFrame:CGRectMake(0, 0, 320, 568)];
+//        [self.SharePhotoView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, 568)];
 //        [self.SharePhotoView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"拍照底图"]]];
         UIGraphicsBeginImageContext(self.view.frame.size);
         [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]] drawInRect:self.view.bounds];
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        
+        UIImageView *PhotoBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+        
+        PhotoBackground.image = [UIImage imageNamed:@"拍照底图"];
+        
+        [self.view addSubview:PhotoBackground];
+        [self.view sendSubviewToBack:PhotoBackground];
+        
+//        [self.view sendSubviewToBack:shareBackground];
+
+        
+        
         self.SharePhotoView.backgroundColor = [UIColor colorWithPatternImage:image];
         
-        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(5, 18, 50, 36)];
-        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(250, 20, 50, 36)];
+        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15, 18, 50, 36)];
+        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70, 20, 45, 36)];
         
     }
     
 
-    UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, IPhoneHeight*60/568)];
+    UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*60/568)];
     //    topBar.backgroundColor = [UIColor colorWithRed:255/255.0f green:167/255.0f blue:22/255.0f alpha:1.0f];
     topBar.backgroundColor = [UIColor clearColor];
     if ([CommonUtility isSystemLangChinese]) {
@@ -530,12 +576,12 @@ UIView *tmpCustomView;
     [topBar addSubview:self.cancelCamera];
     
     
-    self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, IPhoneHeight-(IPhoneHeight*73/568), 320, IPhoneHeight*73/568)];
+    self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-(SCREEN_HEIGHT*73/568), SCREEN_WIDTH, SCREEN_HEIGHT*73/568)];
     //    self.bottomBar.backgroundColor = [UIColor colorWithRed:255/255.0f green:167/255.0f blue:22/255.0f alpha:1.0f];
     
     self.bottomBar.backgroundColor = [UIColor clearColor];
     
-    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(130, 15, 70, 50)];
+    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 5, 70, 50)];
     
     if ([CommonUtility isSystemLangChinese]) {
         
@@ -553,12 +599,12 @@ UIView *tmpCustomView;
 
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         
-        [backImage setFrame:CGRectMake(0, topBar.frame.size.height+8, 320, (IPhoneHeight - topBar.frame.size.height - self.bottomBar.frame.size.height))];
+        [backImage setFrame:CGRectMake(0, topBar.frame.size.height+8, SCREEN_WIDTH, (SCREEN_HEIGHT - topBar.frame.size.height - self.bottomBar.frame.size.height))];
         [backImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@480",self.frontImageName]]];
 
     }else
     {
-        [backImage setFrame:CGRectMake(0, topBar.frame.size.height, 320, (IPhoneHeight - topBar.frame.size.height - self.bottomBar.frame.size.height))];
+        [backImage setFrame:CGRectMake(0, topBar.frame.size.height, SCREEN_WIDTH, (SCREEN_HEIGHT - topBar.frame.size.height - self.bottomBar.frame.size.height))];
         [backImage setImage:[UIImage imageNamed:self.frontImageName]];
    
     }
@@ -676,7 +722,7 @@ UIView *tmpCustomView;
     [UIView beginAnimations:@"goAttach"context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:1.0];
-    self.rewardImage.frame=CGRectMake(self.shareView.frame.size.width-170, self.shareView.frame.size.height-140,170 ,170);
+    self.rewardImage.frame=CGRectMake(SCREEN_WIDTH-170, SCREEN_HEIGHT-140,170 ,170);
     
     [UIView setAnimationDidStopSelector:@selector(soundStart)];
 

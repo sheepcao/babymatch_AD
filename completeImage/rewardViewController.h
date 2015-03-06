@@ -27,7 +27,7 @@
 @property (nonatomic, strong) AVAudioPlayer *myAudioPlayer;
 @property (strong, nonatomic) IBOutlet UIButton *goCamera;
 @property (strong, nonatomic)  UIImageView *backgroundImg;
-@property (weak, nonatomic) IBOutlet UIImageView *babyRewordImg;
+@property (strong, nonatomic) UIImageView *babyRewordImg;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 @property (strong, nonatomic) IBOutlet UIImageView *babyTextImg;

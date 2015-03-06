@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="sharePhotoViewController">
@@ -15,13 +17,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="eFB-ow-hHc">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-ow-hHc">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8Ay-Jl-Pxx">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ay-Jl-Pxx">
                             <rect key="frame" x="20" y="18" width="53" height="34"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="8Ay-Jl-Pxx" secondAttribute="height" multiplier="53:34" id="B3g-RK-LFf"/>
+                            </constraints>
                             <state key="normal" image="returnToLevel.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -31,9 +34,20 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.74117647058823533" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="JQT-9a-y1R"/>
+                        <constraint firstItem="8Ay-Jl-Pxx" firstAttribute="leading" secondItem="eFB-ow-hHc" secondAttribute="leading" constant="20" id="fOf-FT-71c"/>
+                        <constraint firstItem="8Ay-Jl-Pxx" firstAttribute="width" secondItem="eFB-ow-hHc" secondAttribute="height" multiplier="53:65" id="nNK-59-nmx"/>
+                        <constraint firstAttribute="centerY" secondItem="8Ay-Jl-Pxx" secondAttribute="centerY" constant="-2.5" id="zHR-2h-HDG"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="eFB-ow-hHc" firstAttribute="top" secondItem="1" secondAttribute="top" id="FIi-zX-LYt"/>
+                <constraint firstAttribute="trailing" secondItem="eFB-ow-hHc" secondAttribute="trailing" id="kl1-wM-eMH"/>
+                <constraint firstItem="eFB-ow-hHc" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="shy-d1-ROY"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>

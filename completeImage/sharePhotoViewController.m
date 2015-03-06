@@ -8,6 +8,9 @@
 
 #import "sharePhotoViewController.h"
 
+typedef void (^sendImageBackHandler)(void);
+
+
 @interface sharePhotoViewController ()
 
 @property (nonatomic ,strong) UIView *shareView ;
@@ -18,9 +21,14 @@
 @property (nonatomic ,strong) UIButton *shutter;
 @property (nonatomic ,strong) UIButton *retakeButton;
 
+
+
 @end
 
 @implementation sharePhotoViewController
+{
+    UIImageView *shareBackground;
+}
 
 NSInteger resultNum;
 UIImageView *wrongAnswer;
@@ -60,7 +68,7 @@ UIView *tmpCustomView;
         
     }else
     {
-        [self.view setFrame:CGRectMake(0, 0, 320, 568)];
+//        [self.view setFrame:CGRectMake(0, 0, 320, 568)];
     }
     
     if ([CommonUtility isSystemLangChinese]) {
@@ -73,54 +81,70 @@ UIView *tmpCustomView;
         [self.backButton setImage:[UIImage imageNamed:@"returnTappedEN"] forState:UIControlStateHighlighted];
     }
     
-    self.shareView = [[UIView alloc] initWithFrame:CGRectMake(0, IPhoneHeight*60/568, 320, IPhoneHeight - IPhoneHeight*73/568 - IPhoneHeight*60/568)];
+    self.shareView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT*60/568, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT*73/568 - SCREEN_HEIGHT*60/568)];
     self.shareView.backgroundColor = [UIColor clearColor];
     
-    self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0 , 0, 320, self.shareView.frame.size.height)];
-    self.backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -IPhoneHeight*60/568, 320, 426)];
+    self.frontImage = [[UIImageView alloc] initWithFrame:CGRectMake(0 , 0, SCREEN_WIDTH, self.shareView.frame.size.height)];
+    self.backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, -SCREEN_HEIGHT*60/568, SCREEN_WIDTH, 426)];
     [self.frontImage setClipsToBounds:YES];
     [self.backImage setClipsToBounds:YES];
 
     self.frontImage.backgroundColor = [UIColor clearColor];
     self.backImage.backgroundColor = [UIColor clearColor];
     
-//    [self.shareView addSubview:self.backImage];
     [self.shareView addSubview:self.backImage];
     [self.shareView sendSubviewToBack:self.backImage];
     [self.shareView addSubview:self.frontImage];
 
-/*
-    self.saveImage = [[UIButton alloc] initWithFrame:CGRectMake(60, 25, 40, 30)];
-    [self.saveImage setTitle:@"保存" forState:UIControlStateNormal];
-    self.saveImage.backgroundColor = [UIColor lightGrayColor];
-    [self.saveImage addTarget:self action:@selector(saveImage:) forControlEvents:UIControlEventTouchUpInside];
-*/
+
+    CGFloat deviceOffset_height=0;
+    CGFloat deviceOffset_width=0;
+    CGFloat deviceOffset_size=0;
+    //    CGFloat deviceOffset_height=0;
+    
+
+    if (IS_IPHONE_6) {
+        
+        deviceOffset_height = 70;
+        deviceOffset_width = 10;
+        deviceOffset_size= 5;
+        
+        
+        
+        
+        
+    }else if (IS_IPHONE_6P)
+    {
+        deviceOffset_height = 120;
+        deviceOffset_width = 15;
+        deviceOffset_size= 7;
+
+    }
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         self.share = [[UIButton alloc] initWithFrame:CGRectMake(125, 395, 70, 70)];
         self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 395, 70, 70)];
         self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(243, 408, 50, 50)];
         if ([CommonUtility isSystemVersionLessThan7]) {
-        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(100, 290, 120, 60)];
+        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 60, 290, 120, 60)];
             
         }else
         {
-        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(100, 310, 120, 60)];
+        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 60, 310, 120, 60)];
         }
 
 
         
     }else
     {
-        self.share = [[UIButton alloc] initWithFrame:CGRectMake(125, 490, 80, 80)];
-        self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 490, 80, 80)];
-        self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(243, 498, 60, 60)];
-        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(100, 390, 120, 60)];
+        self.share = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-(80+deviceOffset_size)/2, SCREEN_HEIGHT-80-deviceOffset_size, 80+deviceOffset_size, 80+deviceOffset_size)];
+        self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10+deviceOffset_width, SCREEN_HEIGHT-80-deviceOffset_size, 80+deviceOffset_size, 80+deviceOffset_size)];
+        self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-20-(60+deviceOffset_size)-deviceOffset_width, SCREEN_HEIGHT-70-deviceOffset_size, 60+deviceOffset_size, 60+deviceOffset_size)];
+        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 60, 390+deviceOffset_height, 120, 60)];
         
         
     }
     
-//    self.share = [[UIButton alloc] initWithFrame:CGRectMake(125, 490, 80, 80)];
     if ([CommonUtility isSystemLangChinese]) {
         
        [self.share setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"分享" ofType:@"png"]] forState:UIControlStateNormal];
@@ -134,11 +158,10 @@ UIView *tmpCustomView;
         [self.retakeButton setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"en-重拍" ofType:@"png"]] forState:UIControlStateNormal];
         [self.savePic setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"en-保存" ofType:@"png"]] forState:UIControlStateNormal];
     }
-//    [self.share setImage:[UIImage imageNamed:@"分享"] forState:UIControlStateNormal];
+
+    
     [self.share addTarget:self action:@selector(shareAlert) forControlEvents:UIControlEventTouchUpInside];
 
-//    self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 490, 80, 80)];
-//    [self.retakeButton setImage:[UIImage imageNamed:@"重拍"] forState:UIControlStateNormal];
     [self.retakeButton addTarget:self action:@selector(photograph:) forControlEvents:UIControlEventTouchUpInside];
     
 
@@ -168,6 +191,8 @@ UIView *tmpCustomView;
     
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [MobClick beginLogPageView:@"shareOnlyPage"];
@@ -188,7 +213,7 @@ UIView *tmpCustomView;
             UIGraphicsEndImageContext();
             self.view.backgroundColor = [UIColor colorWithPatternImage:image];
             
-            UIImageView *bottombar = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-IPhoneHeight*73/568-20, 320, IPhoneHeight*73/568)];
+            UIImageView *bottombar = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-SCREEN_HEIGHT*73/568-20, SCREEN_WIDTH, SCREEN_HEIGHT*73/568)];
             [bottombar setImage:[UIImage imageNamed:@"bottomImage"]];
             [self.view addSubview:bottombar];
             
@@ -201,12 +226,20 @@ UIView *tmpCustomView;
 
         }else
         {
-             UIGraphicsBeginImageContext(self.view.frame.size);
-            [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]] drawInRect:self.view.bounds];
-            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+//             UIGraphicsBeginImageContext(self.view.frame.size);
+//            [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]] drawInRect:self.view.bounds];
+//            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//            UIGraphicsEndImageContext();
+//            self.view.backgroundColor = [UIColor colorWithPatternImage:image];
             [self.frontImage setImage:[UIImage imageNamed:self.frontImageName]];
+            
+            shareBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+            
+            shareBackground.image = [UIImage imageNamed:@"拍照底图"];
+            
+            [self.view addSubview:shareBackground];
+            [self.view sendSubviewToBack:shareBackground];
+
 
         }
 
@@ -231,6 +264,9 @@ UIView *tmpCustomView;
                 UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
                 UIGraphicsEndImageContext();
                 self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+                
+                
+                
             }
 
 
@@ -239,20 +275,36 @@ UIView *tmpCustomView;
         {
             if ([CommonUtility isSystemLangChinese]) {
            
-//                self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"notFinish" ofType:@"png"]]];
-                UIGraphicsBeginImageContext(self.view.frame.size);
-                [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"notFinish" ofType:@"png"]] drawInRect:self.view.bounds];
-                UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+//                UIGraphicsBeginImageContext(self.view.frame.size);
+//                [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"notFinish" ofType:@"png"]] drawInRect:self.view.bounds];
+//                UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//                UIGraphicsEndImageContext();
+//                self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+                
+                shareBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+                
+                shareBackground.image = [UIImage imageNamed:@"notFinish"];
+                
+                [self.view addSubview:shareBackground];
+                [self.view sendSubviewToBack:shareBackground];
+                
+                
             }else
             {
-//                self.view.backgroundColor = [UIColor colorWithPatternImage:    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"en-notFinish" ofType:@"png"]]];
-                UIGraphicsBeginImageContext(self.view.frame.size);
-                [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"en-notFinish" ofType:@"png"]] drawInRect:self.view.bounds];
-                UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-                UIGraphicsEndImageContext();
-                self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+
+//                UIGraphicsBeginImageContext(self.view.frame.size);
+//                [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"en-notFinish" ofType:@"png"]] drawInRect:self.view.bounds];
+//                UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//                UIGraphicsEndImageContext();
+//                self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+                
+                shareBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+                
+                shareBackground.image = [UIImage imageNamed:@"en-notFinish"];
+                
+                [self.view addSubview:shareBackground];
+                [self.view sendSubviewToBack:shareBackground];
+                
             }
         }
         [self.frontImage setImage:nil];
@@ -312,11 +364,11 @@ UIView *tmpCustomView;
   //  [UIApplication sharedApplication].statusBarHidden = YES;
     if([CommonUtility isSystemVersionLessThan7])
     {
-        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, IPhoneHeight)];
+        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 
     }else
     {
-        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, IPhoneHeight+20)];
+        self.SharePhotoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 
     }
     
@@ -338,13 +390,24 @@ UIView *tmpCustomView;
         [[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"拍照底图" ofType:@"png"]] drawInRect:self.view.bounds];
         UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
+        
+        UIImageView *PhotoBackground = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+        
+        PhotoBackground.image = [UIImage imageNamed:@"拍照底图"];
+        
+        [self.view addSubview:PhotoBackground];
+        [self.view sendSubviewToBack:PhotoBackground];
+
+        [self.view sendSubviewToBack:shareBackground];
+        
+        
         self.SharePhotoView.backgroundColor = [UIColor colorWithPatternImage:image];
-        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(5, 18, 50, 36)];
-        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(250, 20, 50, 36)];
+        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15, 18, 50, 36)];
+        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70, 20, 45, 36)];
 
     }
 
-    UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, IPhoneHeight*60/568)];
+    UIView *topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*60/568)];
 //    topBar.backgroundColor = [UIColor colorWithRed:255/255.0f green:167/255.0f blue:22/255.0f alpha:1.0f];
     topBar.backgroundColor = [UIColor clearColor];
 //    self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(5, 18, 50, 36)];
@@ -368,11 +431,11 @@ UIView *tmpCustomView;
     [topBar addSubview:self.cancelCamera];
     
     
-    self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, IPhoneHeight-(IPhoneHeight*73/568), 320, IPhoneHeight*73/568)];
+    self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-(SCREEN_HEIGHT*73/568), SCREEN_WIDTH, SCREEN_HEIGHT*73/568)];
 //    self.bottomBar.backgroundColor = [UIColor colorWithRed:255/255.0f green:167/255.0f blue:22/255.0f alpha:1.0f];
     self.bottomBar.backgroundColor = [UIColor clearColor];
 
-    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(130, 5, 70, 50)];
+    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 5, 70, 50)];
     if ([CommonUtility isSystemLangChinese]) {
         
         [self.shutter setImage:[UIImage imageNamed:@"shutter"] forState:UIControlStateNormal];
@@ -389,7 +452,7 @@ UIView *tmpCustomView;
     [self.bottomBar addSubview:self.shutter];
     
 
-    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, topBar.frame.size.height, 320, (IPhoneHeight - topBar.frame.size.height - self.bottomBar.frame.size.height))];
+    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, topBar.frame.size.height, SCREEN_WIDTH, (SCREEN_HEIGHT - topBar.frame.size.height - self.bottomBar.frame.size.height))];
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         [backImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@480",self.frontImageName]]];
@@ -737,7 +800,7 @@ UIView *tmpCustomView;
     NSString *message;
     
     if ([CommonUtility isSystemLangChinese]) {
-        message = @"宝宝识图－中英双语看图识字\n我最聪明我最棒，开动脑筋和我一起进步吧!";
+        message = @"宝宝识图－中英双语看图识字\n我最聪明我最棒!";
     }else
     {
         message = @"Flash Cards-Talk&Active\nDownload : https://itunes.apple.com/us/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
@@ -750,7 +813,7 @@ UIView *tmpCustomView;
                                        delegate:(id)self];
     
     // music url
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"];
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeDefault url:@"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8"];
     
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = @"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
     [UMSocialData defaultData].extConfig.wechatSessionData.url = @"https://itunes.apple.com/cn/app/bao-bei-pin-ba-mian-fei-ban/id936064964?ls=1&mt=8";
@@ -788,7 +851,7 @@ UIView *tmpCustomView;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
+    if([textField.text isEqualToString:[NSString stringWithFormat:@"%ld",(long)resultNum]])
     {
         [self.lockedAlert close];
         [self shareFunc];

@@ -32,7 +32,18 @@
     UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 50, 36)];
     UIButton *goAppstore = [[UIButton alloc] initWithFrame:CGRectMake(110, self.view.frame.size.height/2-70,100 , 51)];
     UIButton *submitEmail = [[UIButton alloc] initWithFrame:CGRectMake(110, self.view.frame.size.height/2+210,100, 51)];
-
+    CGFloat deviceOffset_height=0;
+    CGFloat deviceOffset_width=0;
+    CGFloat deviceOffset_size=0;
+    
+    if (IS_IPHONE_6) {
+        deviceOffset_height = 35;
+        deviceOffset_width = 24;
+        deviceOffset_size= 5;
+    }
+    
+    [goAppstore setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2-70,100+deviceOffset_size , 51+deviceOffset_size)];
+    [submitEmail setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2+210+deviceOffset_height,100+deviceOffset_size, 51+deviceOffset_size)];
 
 
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
