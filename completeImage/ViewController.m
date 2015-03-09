@@ -121,6 +121,25 @@ bool levelLock[bigLevel];
         self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(20, 25, 200, 41)];
         self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210+distanceHeight*2+3, 40, 40)];
         
+    }else if(IS_IPAD)
+    {
+        CGFloat distanceHeight = 80;
+        CGFloat distancewidth = 54;
+        CGFloat btnSize = 35;
+        
+        
+        self.animal = [[UIButton alloc] initWithFrame:CGRectMake(14+distancewidth, 75.5+distanceHeight, levelBtnWidth+btnSize, levelBtnHeight+btnSize)];
+        self.sport = [[UIButton alloc] initWithFrame:CGRectMake(167+distancewidth*4.7, 95+distanceHeight*1.1, levelBtnWidth+btnSize, levelBtnHeight+btnSize)];
+        self.food = [[UIButton alloc] initWithFrame:CGRectMake(31+distancewidth*1.3, 239+8+distanceHeight*2.6, levelBtnWidth+btnSize-3, levelBtnHeight+btnSize-20)];
+        self.livingGood = [[UIButton alloc] initWithFrame:CGRectMake(134+distancewidth*3.8,239+distanceHeight*2.5, levelBtnWidth+btnSize-7, levelBtnHeight+btnSize-7)];
+        self.plant = [[UIButton alloc] initWithFrame:CGRectMake(75+distancewidth*2.4, 389+4+distanceHeight*4.1, levelBtnWidth+btnSize-5, levelBtnHeight+btnSize-5)];
+        self.moreFun = [[UIButton alloc] initWithFrame:CGRectMake(166+distancewidth*4.7, 385+distanceHeight*3.93, levelBtnWidth+btnSize-20, levelBtnHeight+btnSize-25)];
+        self.aboutUs = [[UIButton alloc] initWithFrame:CGRectMake(248+distancewidth*6.5, 398+distanceHeight*3.9, levelBtnWidth+btnSize-30, levelBtnHeight+btnSize-35)];
+        self.shareApp = [[UIButton alloc] initWithFrame:CGRectMake(228+distancewidth*7, 30+distanceHeight/2-20, 60+btnSize, 60+btnSize)];
+        
+        self.levelTitle = [[UIImageView alloc] initWithFrame:CGRectMake(40, 35, 400, 80)];
+        self.movingSnail = [[UIImageView alloc] initWithFrame:CGRectMake(1, 210+distanceHeight*2+23, 80, 80)];
+        
     }else {
         if ([CommonUtility isSystemVersionLessThan7]) {
             [self.view setFrame:CGRectMake(0, -20, 320, 480)];
@@ -303,7 +322,7 @@ bool levelLock[bigLevel];
     [UIView beginAnimations:@"toRight"context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:18];
-    aframe.origin.x+=320;
+    aframe.origin.x+=SCREEN_WIDTH;
     self.movingSnail.frame=aframe;
     [UIView setAnimationDidStopSelector:@selector(moveToLeft)];
     [UIView commitAnimations];
@@ -318,7 +337,7 @@ bool levelLock[bigLevel];
     [UIView beginAnimations:@"toleft"context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:18];
-    aframe.origin.x+=320;
+    aframe.origin.x+=SCREEN_WIDTH;
     self.movingSnail.frame=aframe;
     [UIView setAnimationDidStopSelector:@selector(moveToRight)];
     [UIView commitAnimations];
@@ -1027,7 +1046,7 @@ bool levelLock[bigLevel];
 - (void)snailAnimation {
 
 	
-	self.view.backgroundColor = [UIColor greenColor];
+//	self.view.backgroundColor = [UIColor greenColor];
     
 	UIBezierPath *trackPath = [UIBezierPath bezierPath];
 	
@@ -1050,6 +1069,16 @@ bool levelLock[bigLevel];
         [trackPath addLineToPoint:P(200+29,self.movingSnail.frame.origin.y+1+17)];
         [trackPath addLineToPoint:P(280+33,self.movingSnail.frame.origin.y+1+16)];
         [trackPath addLineToPoint:P(350+50,self.movingSnail.frame.origin.y-5+16)];
+    }else if(IS_IPAD)
+    {
+        [trackPath moveToPoint:P(-30,self.movingSnail.frame.origin.y+17)];
+        
+        [trackPath addLineToPoint:P(30+90,self.movingSnail.frame.origin.y+12)];
+        
+        [trackPath addLineToPoint:P(110+140,self.movingSnail.frame.origin.y-15+18)];
+        [trackPath addLineToPoint:P(200+240,self.movingSnail.frame.origin.y+1+17)];
+        [trackPath addLineToPoint:P(280+360,self.movingSnail.frame.origin.y+1+16)];
+        [trackPath addLineToPoint:P(350+450,self.movingSnail.frame.origin.y-5+16)];
     }else{
     [trackPath moveToPoint:P(-30,self.movingSnail.frame.origin.y+15)];
     
@@ -1063,6 +1092,10 @@ bool levelLock[bigLevel];
 
 	CALayer *car = [CALayer layer];
 	car.bounds = CGRectMake(0, 0, 40, 40);
+    if (IS_IPAD) {
+        car.bounds = CGRectMake(0, 0, 70, 70);
+
+    }
 	car.position = P(-30,self.movingSnail.frame.origin.y);
 	car.contents = (id)([UIImage imageNamed:@"movingSnail"].CGImage);
 	[self.view.layer addSublayer:car];

@@ -35,6 +35,8 @@
     CGFloat deviceOffset_height=0;
     CGFloat deviceOffset_width=0;
     CGFloat deviceOffset_size=0;
+    CGFloat deviceOffset_top=0;
+
     
     if (IS_IPHONE_6) {
         deviceOffset_height = 35;
@@ -46,9 +48,17 @@
         deviceOffset_width = 42;
         deviceOffset_size= 7;
     }
+    else if(IS_IPAD)
+    {
+        deviceOffset_height = 200;
+        deviceOffset_width = 210;
+        deviceOffset_size= 47;
+        deviceOffset_top = 40;
+        [backBtn setFrame:CGRectMake(15, 30, 90, 60)];
+    }
     
-    [goAppstore setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2-70,100+deviceOffset_size , 51+deviceOffset_size)];
-    [submitEmail setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2+210+deviceOffset_height,100+deviceOffset_size, 51+deviceOffset_size)];
+    [goAppstore setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2-70-deviceOffset_top,100+deviceOffset_size , 51+deviceOffset_size/2)];
+    [submitEmail setFrame:CGRectMake(110+deviceOffset_width, self.view.frame.size.height/2+210+deviceOffset_height-deviceOffset_top/2,100+deviceOffset_size, 51+deviceOffset_size/2)];
 
 
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
@@ -74,7 +84,7 @@
     
     
     UIImageView *fullScreen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    fullScreen.contentMode = UIViewContentModeScaleAspectFit;
+    fullScreen.contentMode = UIViewContentModeScaleToFill;
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
 
         if ([CommonUtility isSystemLangChinese]) {

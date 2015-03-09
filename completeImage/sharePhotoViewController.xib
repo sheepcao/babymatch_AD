@@ -18,12 +18,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-ow-hHc">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ay-Jl-Pxx">
-                            <rect key="frame" x="20" y="18" width="53" height="34"/>
+                            <rect key="frame" x="20" y="10" width="47" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="8Ay-Jl-Pxx" secondAttribute="height" multiplier="53:34" id="B3g-RK-LFf"/>
+                                <constraint firstAttribute="width" secondItem="8Ay-Jl-Pxx" secondAttribute="height" multiplier="47:30" id="Odc-VF-wq7"/>
                             </constraints>
                             <state key="normal" image="returnToLevel.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,10 +35,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.95686274509803915" green="0.74117647058823533" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="65" id="JQT-9a-y1R"/>
+                        <constraint firstAttribute="width" secondItem="eFB-ow-hHc" secondAttribute="height" multiplier="320:49" id="4Mj-pi-DFX"/>
+                        <constraint firstAttribute="centerY" secondItem="8Ay-Jl-Pxx" secondAttribute="centerY" constant="-0.5" id="4qs-mt-R0E"/>
+                        <constraint firstItem="8Ay-Jl-Pxx" firstAttribute="width" secondItem="eFB-ow-hHc" secondAttribute="height" multiplier="47:49" id="IjS-xv-hcU"/>
                         <constraint firstItem="8Ay-Jl-Pxx" firstAttribute="leading" secondItem="eFB-ow-hHc" secondAttribute="leading" constant="20" id="fOf-FT-71c"/>
-                        <constraint firstItem="8Ay-Jl-Pxx" firstAttribute="width" secondItem="eFB-ow-hHc" secondAttribute="height" multiplier="53:65" id="nNK-59-nmx"/>
-                        <constraint firstAttribute="centerY" secondItem="8Ay-Jl-Pxx" secondAttribute="centerY" constant="-2.5" id="zHR-2h-HDG"/>
                     </constraints>
                 </view>
             </subviews>

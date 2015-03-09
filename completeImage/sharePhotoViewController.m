@@ -93,13 +93,15 @@ UIView *tmpCustomView;
     self.backImage.backgroundColor = [UIColor clearColor];
     
     [self.shareView addSubview:self.backImage];
-    [self.shareView sendSubviewToBack:self.backImage];
+//    [self.shareView sendSubviewToBack:self.backImage];
     [self.shareView addSubview:self.frontImage];
 
 
     CGFloat deviceOffset_height=0;
     CGFloat deviceOffset_width=0;
     CGFloat deviceOffset_size=0;
+    CGFloat deviceOffset_size_ipad=0;
+
     //    CGFloat deviceOffset_height=0;
     
 
@@ -119,6 +121,13 @@ UIView *tmpCustomView;
         deviceOffset_width = 15;
         deviceOffset_size= 7;
 
+    }else if (IS_IPAD)
+    {
+        deviceOffset_height = 320;
+        deviceOffset_width = 15;
+        deviceOffset_size= 25;
+        deviceOffset_size_ipad = 60;
+        
     }
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
@@ -140,7 +149,7 @@ UIView *tmpCustomView;
         self.share = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-(80+deviceOffset_size)/2, SCREEN_HEIGHT-80-deviceOffset_size, 80+deviceOffset_size, 80+deviceOffset_size)];
         self.retakeButton = [[UIButton alloc] initWithFrame:CGRectMake(10+deviceOffset_width, SCREEN_HEIGHT-80-deviceOffset_size, 80+deviceOffset_size, 80+deviceOffset_size)];
         self.savePic = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-20-(60+deviceOffset_size)-deviceOffset_width, SCREEN_HEIGHT-70-deviceOffset_size, 60+deviceOffset_size, 60+deviceOffset_size)];
-        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 60, 390+deviceOffset_height, 120, 60)];
+        self.photograph = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 60-deviceOffset_size_ipad/2, 390+deviceOffset_height, 120+deviceOffset_size_ipad, 60+deviceOffset_size_ipad/2)];
         
         
     }
@@ -360,6 +369,23 @@ UIView *tmpCustomView;
 - (IBAction)photograph:(id)sender {
     
     [CommonUtility tapSound:@"tapSound" withType:@"wav"];
+    
+    
+    CGFloat deviceOffset_height=0;
+    CGFloat deviceOffset_width=0;
+    CGFloat deviceOffset_size=0;
+    CGFloat deviceOffset_size_ipad=0;
+    
+    if (IS_IPAD)
+    {
+        deviceOffset_height = 10;
+        deviceOffset_width = 15;
+        deviceOffset_size= 50;
+        deviceOffset_size_ipad = 30;
+        
+    }
+    
+    
 
   //  [UIApplication sharedApplication].statusBarHidden = YES;
     if([CommonUtility isSystemVersionLessThan7])
@@ -402,8 +428,8 @@ UIView *tmpCustomView;
         
         
         self.SharePhotoView.backgroundColor = [UIColor colorWithPatternImage:image];
-        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15, 18, 50, 36)];
-        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70, 20, 45, 36)];
+        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffset_width, 18+deviceOffset_height, 50+deviceOffset_size, 36+deviceOffset_size*2/3)];
+        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70-deviceOffset_width*3, 20+deviceOffset_height, 45+deviceOffset_size, 36+deviceOffset_size*2/3)];
 
     }
 
@@ -434,8 +460,10 @@ UIView *tmpCustomView;
     self.bottomBar = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-(SCREEN_HEIGHT*73/568), SCREEN_WIDTH, SCREEN_HEIGHT*73/568)];
 //    self.bottomBar.backgroundColor = [UIColor colorWithRed:255/255.0f green:167/255.0f blue:22/255.0f alpha:1.0f];
     self.bottomBar.backgroundColor = [UIColor clearColor];
+    
 
-    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 5, 70, 50)];
+
+    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30-deviceOffset_size*3/5, 5+deviceOffset_height*1.5, 70+deviceOffset_size*1.3, 50+deviceOffset_size)];
     if ([CommonUtility isSystemLangChinese]) {
         
         [self.shutter setImage:[UIImage imageNamed:@"shutter"] forState:UIControlStateNormal];
@@ -652,8 +680,14 @@ UIView *tmpCustomView;
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
 
-
+    CGFloat photoOffside = 0;
+    if (IS_IPAD) {
+        photoOffside = SCREEN_HEIGHT*60/568-40;
+    }
+    [self.backImage setFrame: CGRectMake(0,-SCREEN_HEIGHT*60/568+photoOffside, SCREEN_WIDTH, self.shareView.frame.size.height)];
     self.backImage.image = image;
+    [self.view sendSubviewToBack:shareBackground];
+
     
 //    [self performSelector:@selector(wait) withObject:nil afterDelay:0.25f];
    
@@ -733,6 +767,8 @@ UIView *tmpCustomView;
     answer.delegate = self;
     answer.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     
+    [answer addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     
     unsigned int randomA = arc4random()%20;
     unsigned int randomB = arc4random()%20;
@@ -847,6 +883,24 @@ UIView *tmpCustomView;
 -(NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
+}
+
+-(void)textFieldDidChange:(UITextField *)sender
+{
+    UITextField *textField = (UITextField *)sender;
+    
+    NSLog(@"2121212:%@",textField.text );
+
+    
+    if([textField.text isEqualToString:[NSString stringWithFormat:@"%ld",(long)resultNum]])
+    {
+        [self.lockedAlert close];
+        [self shareFunc];
+        
+    
+    }
+    
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

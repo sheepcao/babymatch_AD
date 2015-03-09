@@ -126,6 +126,8 @@ UIView *tmpCustomView;
     CGFloat deviceOffset_height=0;
     CGFloat deviceOffset_width=0;
     CGFloat deviceOffset_size=0;
+    CGFloat deviceOffset_size_ipad=0;
+
     //    CGFloat deviceOffset_height=0;
     
     
@@ -135,9 +137,6 @@ UIView *tmpCustomView;
         deviceOffset_width = 10;
         deviceOffset_size= 5;
         
-        //       [self.photograph setImage:[UIImage imageNamed:@"错误答案"] forState:UIControlStateNormal];
-        
-        
         
         
         
@@ -146,6 +145,13 @@ UIView *tmpCustomView;
         deviceOffset_height = 120;
         deviceOffset_width = 15;
         deviceOffset_size= 7;
+        
+    }else if (IS_IPAD)
+    {
+        deviceOffset_height = 320;
+        deviceOffset_width = 15;
+        deviceOffset_size= 25;
+        deviceOffset_size_ipad = 60;
         
     }
     
@@ -169,7 +175,7 @@ UIView *tmpCustomView;
         self.backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [self.backgroundImg setImage:[UIImage imageNamed: @"rewardPage"]];
         self.babyTextImg = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-240)/2, 209+deviceOffset_height/2, 240, 134)];
-        self.goCamera = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 70, 380+deviceOffset_height, 139, 96)];
+        self.goCamera = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 70-deviceOffset_size_ipad/2, 380+deviceOffset_height, 139+deviceOffset_size_ipad, 96+deviceOffset_size_ipad/2)];
 
 
     }
@@ -275,6 +281,9 @@ UIView *tmpCustomView;
     }else if(IS_IPHONE_6P)
     {
         offside = 30;
+    }else if(IS_IPAD)
+    {
+        offside = 90;
     }
     
     self.babyRewordImg.transform = CGAffineTransformIdentity;
@@ -506,6 +515,22 @@ UIView *tmpCustomView;
 - (IBAction)goPhotograph {
     
     [CommonUtility tapSound:@"tapSound" withType:@"wav"];
+    
+    
+    CGFloat deviceOffset_height=0;
+    CGFloat deviceOffset_width=0;
+    CGFloat deviceOffset_size=0;
+    CGFloat deviceOffset_size_ipad=0;
+    
+    if (IS_IPAD)
+    {
+        deviceOffset_height = 10;
+        deviceOffset_width = 15;
+        deviceOffset_size= 50;
+        deviceOffset_size_ipad = 30;
+        
+    }
+    
 
     //  [UIApplication sharedApplication].statusBarHidden = YES;
     if([CommonUtility isSystemVersionLessThan7])
@@ -550,8 +575,11 @@ UIView *tmpCustomView;
         
         self.SharePhotoView.backgroundColor = [UIColor colorWithPatternImage:image];
         
-        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15, 18, 50, 36)];
-        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70, 20, 45, 36)];
+        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffset_width, 18+deviceOffset_height, 50+deviceOffset_size, 36+deviceOffset_size*2/3)];
+        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70-deviceOffset_width*3, 20+deviceOffset_height, 45+deviceOffset_size, 36+deviceOffset_size*2/3)];
+        
+//        self.cancelCamera = [[UIButton alloc] initWithFrame:CGRectMake(15, 18, 50, 36)];
+//        self.cameraDevice = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70, 20, 45, 36)];
         
     }
     
@@ -584,7 +612,8 @@ UIView *tmpCustomView;
     
     self.bottomBar.backgroundColor = [UIColor clearColor];
     
-    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 5, 70, 50)];
+//    self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30, 5, 70, 50)];
+        self.shutter = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-30-deviceOffset_size*3/5, 5+deviceOffset_height*1.5, 70+deviceOffset_size*1.3, 50+deviceOffset_size)];
     
     if ([CommonUtility isSystemLangChinese]) {
         
@@ -704,7 +733,14 @@ UIView *tmpCustomView;
     
     
     
+    CGFloat photoOffside = 0;
+    if (IS_IPAD) {
+        photoOffside = SCREEN_HEIGHT*60/568-40;
+    }
+    [self.backImage setFrame: CGRectMake(0,-SCREEN_HEIGHT*60/568+photoOffside, SCREEN_WIDTH, self.shareView.frame.size.height)];
     self.backImage.image = image;
+//    [self.view sendSubviewToBack:shareBackground];
+    
     [self performSelector:@selector(goAttachThread) withObject:nil afterDelay:0.5f];
     
 
@@ -721,11 +757,22 @@ UIView *tmpCustomView;
 
 -(void)goAttach
 {
+    CGFloat offside = 0;
+    if (IS_IPHONE_6) {
+        offside = 20;
+    }else if(IS_IPHONE_6P)
+    {
+        offside = 30;
+    }else if(IS_IPAD)
+    {
+        offside = 90;
+    }
+    
     self.rewardImage.transform = CGAffineTransformIdentity;
     [UIView beginAnimations:@"goAttach"context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDuration:1.0];
-    self.rewardImage.frame=CGRectMake(SCREEN_WIDTH-170, SCREEN_HEIGHT-140,170 ,170);
+    self.rewardImage.frame=CGRectMake(SCREEN_WIDTH-(170+offside), SCREEN_HEIGHT-(170+offside*3.2),170+offside ,170+offside);
     
     [UIView setAnimationDidStopSelector:@selector(soundStart)];
 
@@ -817,7 +864,8 @@ UIView *tmpCustomView;
     [answer setBackground:[UIImage imageNamed:@"border"]];
     answer.delegate = self;
     answer.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    
+    [answer addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+
     
     unsigned int randomA = arc4random()%20;
     unsigned int randomB = arc4random()%20;
@@ -935,10 +983,25 @@ UIView *tmpCustomView;
 {
     return UIInterfaceOrientationMaskPortrait;
 }
-
+-(void)textFieldDidChange:(UITextField *)sender
+{
+    UITextField *textField = (UITextField *)sender;
+    
+    
+    
+    if([textField.text isEqualToString:[NSString stringWithFormat:@"%ld",(long)resultNum]])
+    {
+        [self.lockedAlert close];
+        [self shareFunc];
+        
+    }
+    
+    
+    
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if([textField.text isEqualToString:[NSString stringWithFormat:@"%d",resultNum]])
+    if([textField.text isEqualToString:[NSString stringWithFormat:@"%ld",(long)resultNum]])
     {
         [self.lockedAlert close];
         [self shareFunc];

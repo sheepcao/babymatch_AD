@@ -41,7 +41,8 @@ SystemSoundID soundEN;
         CGFloat deviceOffside_size = 0;
         CGFloat deviceOffside_w = 0;
         CGFloat deviceOffside_h = 0;
-
+        CGFloat deviceOffside_height = 0;
+        CGFloat cryOffside_size = 0;
 
         if (IS_IPHONE_6) {
             deviceOffside_size = 30;
@@ -52,6 +53,15 @@ SystemSoundID soundEN;
             deviceOffside_size = 40;
             deviceOffside_h = 28;
             deviceOffside_w = 24;
+        }else if(IS_IPAD)
+        {
+            deviceOffside_size = 160;
+            deviceOffside_height = 60;
+            
+            deviceOffside_h = 46;
+            deviceOffside_w = 135;
+            cryOffside_size = 25;
+            
         }
         
         if ([[UIScreen mainScreen] bounds].size.height == 480) {
@@ -63,10 +73,10 @@ SystemSoundID soundEN;
         }else
         {
             
-            self.frame = CGRectMake(80+deviceOffside_w, 70+deviceOffside_h, 160+deviceOffside_size, 120);
+            self.frame = CGRectMake(80+deviceOffside_w, 70+deviceOffside_h, 160+deviceOffside_size, 120+deviceOffside_height);
             
-            self.answerCN = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffside_size/2, 13, 140, 45)];
-            self.answerEN = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffside_size/2, 62, 140, 45)];
+            self.answerCN = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffside_size/2-cryOffside_size, 13+cryOffside_size/2, 140+cryOffside_size*1.85, 45+cryOffside_size*0.9)];
+            self.answerEN = [[UIButton alloc] initWithFrame:CGRectMake(15+deviceOffside_size/2-cryOffside_size, 62+1.2*cryOffside_size, 140+cryOffside_size*1.85, 45+cryOffside_size*0.9)];
             
         }
         

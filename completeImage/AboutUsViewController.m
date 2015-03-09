@@ -46,9 +46,15 @@
 
     [backBtn addTarget:self action:@selector(backTapped) forControlEvents:UIControlEventTouchUpInside];
 
+    if(IS_IPAD)
+    {
+
+        [backBtn setFrame:CGRectMake(15, 30, 90, 60)];
+    }
+
     
     UIImageView *fullScreen = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    fullScreen.contentMode = UIViewContentModeScaleAspectFit;
+    fullScreen.contentMode = UIViewContentModeScaleToFill;
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
         

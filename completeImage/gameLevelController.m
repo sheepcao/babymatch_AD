@@ -79,28 +79,28 @@ NSMutableArray  *arrayGif;
     if (IS_IPHONE_6) {
         
         deviceOffset_height = 25;
-        deviceOffset_width = 20;
+//        deviceOffset_width = 20;
         deviceOffset_size= 5;
-        
-        
-        
-
-
-        
+ 
     }else if (IS_IPHONE_6P)
     {
         deviceOffset_height = 35;
-        deviceOffset_width = 20;
+//        deviceOffset_width = 20;
         deviceOffset_size= 8;
+    }else if(IS_IPAD)
+    {
+        deviceOffset_height = 180;
+        deviceOffset_width = 50;
+        deviceOffset_size= 55;
     }
     
     self.answer2 = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - (55+deviceOffset_size)/2, 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
     self.answer2.tag = 2;
     
-    self.answer1 = [[UIButton alloc] initWithFrame:CGRectMake(self.answer2.frame.origin.x - 45 - (55+deviceOffset_size), 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
+    self.answer1 = [[UIButton alloc] initWithFrame:CGRectMake(self.answer2.frame.origin.x - 45-deviceOffset_width - (55+deviceOffset_size), 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
     self.answer1.tag = 1;
 
-    self.answer3 = [[UIButton alloc] initWithFrame:CGRectMake(self.answer2.frame.origin.x + 45 + (55+deviceOffset_size), 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
+    self.answer3 = [[UIButton alloc] initWithFrame:CGRectMake(self.answer2.frame.origin.x + 45+deviceOffset_width + (55+deviceOffset_size), 450+2*deviceOffset_height, 55+deviceOffset_size, 55+deviceOffset_size)];
     self.answer3.tag = 3;
 
     [self.answer1 setBackgroundImage:[UIImage imageNamed:@"choiceBackground"] forState:UIControlStateNormal];
@@ -125,6 +125,8 @@ NSMutableArray  *arrayGif;
     {
         CGFloat pictureOffset_height=0;
         CGFloat pictureOffset_width=0;
+        CGFloat pictureOffset_h = 0;
+        CGFloat pictureOffset_w = 0;
 
 
         
@@ -151,10 +153,28 @@ NSMutableArray  *arrayGif;
                 posY[i] +=(1+pictureOffset_height);
                 posX[i] +=pictureOffset_width;
             }
+        }else if(IS_IPAD)
+        {
+
+            
+            pictureOffset_height=100;
+            pictureOffset_width=95;
+            pictureOffset_h = 230;
+            pictureOffset_w = 250;
+            
+            for (int i = 0; i <MAXlevel; i++) {
+                
+                posY[i] += (posY[i]-190) ;
+                posX[i] += (posX[i]-33) ;
+                
+                posY[i] +=pictureOffset_height;
+                posX[i] +=pictureOffset_width;
+            }
+
         }
         
-        self.picture = [[UIImageView alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250, 230)];
-        self.animationBegin = [[UIButton alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250, 230)];
+        self.picture = [[UIImageView alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250+pictureOffset_w, 230+pictureOffset_h)];
+        self.animationBegin = [[UIButton alloc] initWithFrame:CGRectMake(33+pictureOffset_width, 190+pictureOffset_height, 250+pictureOffset_w, 230+pictureOffset_h)];
 
 
         
@@ -302,7 +322,57 @@ NSMutableArray  *arrayGif;
         levelCountCenter.x += 47;
         [self.levelCount setCenter:levelCountCenter];
         
+    }else if (IS_IPAD) {
+        
+        CGRect priorBtnSize = self.priorButton.bounds;
+        priorBtnSize.size.width +=50  ;
+        priorBtnSize.size.height +=38;
+        [self.priorButton setBounds:priorBtnSize];
+        CGPoint priorBtnCenter = self.priorButton.center;
+        priorBtnCenter.y += 85;
+        priorBtnCenter.x += 60;
+        [self.priorButton setCenter:priorBtnCenter];
+        
+        CGRect nextBtnSize = self.nextButton.bounds;
+        nextBtnSize.size.width +=50  ;
+        nextBtnSize.size.height +=38;
+        [self.nextButton setBounds:nextBtnSize];
+        CGPoint nextBtnCenter = self.nextButton.center;
+        nextBtnCenter.y += 85;
+        nextBtnCenter.x += 370;
+        [self.nextButton setCenter:nextBtnCenter];
+        
+        CGRect backBtnSize = self.backButton.bounds;
+        backBtnSize.size.width +=40  ;
+        backBtnSize.size.height +=27;
+        [self.backButton setBounds:backBtnSize];
+        CGPoint backButtonCenter = self.backButton.center;
+        backButtonCenter.y += 25;
+        backButtonCenter.x += 35;
+        [self.backButton setCenter:backButtonCenter];
+        
+        CGRect shareBtnSize = self.shareBtn.bounds;
+        shareBtnSize.size.width +=35  ;
+        shareBtnSize.size.height +=23;
+        [self.shareBtn setBounds:shareBtnSize];
+        CGPoint shareBtnCenter = self.shareBtn.center;
+        shareBtnCenter.y += 25;
+        shareBtnCenter.x += 398;
+        [self.shareBtn setCenter:shareBtnCenter];
+        
+        CGRect levelSize = self.levelCount.bounds;
+        levelSize.size.width +=35  ;
+        levelSize.size.height +=23;
+        [self.levelCount setBounds:levelSize];
+        CGPoint levelCountCenter = self.levelCount.center;
+        levelCountCenter.y += 32;
+        levelCountCenter.x += 223;
+        [self.levelCount setCenter:levelCountCenter];
+        self.levelCount.font = [UIFont fontWithName:@"SegoePrint" size:50];
+
+        
     }
+
     
     
 }
@@ -573,6 +643,10 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     [self setImages:an1:an2 :an3 :pic];
 
     CGFloat sizeOffside = 0;
+    if(IS_IPAD)
+    {
+        sizeOffside = 55;
+    }
 
     
     if (level%10 == 9) {
@@ -906,8 +980,11 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
     }
     
     CGFloat deviceOffside_size = 0;
+    CGFloat deviceOffside_height = 0;
     CGFloat deviceOffside_w = 0;
     CGFloat deviceOffside_h = 0;
+    CGFloat cryOffside_size = 0;
+
     if (IS_IPHONE_6) {
         deviceOffside_size = 30;
         deviceOffside_h = 5;
@@ -917,6 +994,15 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
         deviceOffside_size = 40;
         deviceOffside_h = 28;
         deviceOffside_w = 24;
+    }else if(IS_IPAD)
+    {
+        deviceOffside_size = 160;
+        deviceOffside_height = 60;
+
+        deviceOffside_h = 46;
+        deviceOffside_w = 135;
+        cryOffside_size = 40;
+
     }
     
     if ([[UIScreen mainScreen] bounds].size.height == 480) {
@@ -924,13 +1010,14 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
             self.wrongLabel = [[UIImageView alloc] initWithFrame:CGRectMake(80, 60, 160, 100)];
     }else
     {
-        self.wrongLabel = [[UIImageView alloc] initWithFrame:CGRectMake(80+deviceOffside_w, 70+deviceOffside_h, 160+deviceOffside_size, 120)];
+        self.wrongLabel = [[UIImageView alloc] initWithFrame:CGRectMake(80+deviceOffside_w, 70+deviceOffside_h, 160+deviceOffside_size, 120+deviceOffside_height)];
     }
 
     [self.wrongLabel setImage:[UIImage imageNamed:@"board" ]];
     [self.wrongLabel setContentMode:UIViewContentModeScaleToFill];
 
-    UIImageView *cryFace = [[UIImageView alloc] initWithFrame:CGRectMake(self.wrongLabel.frame.size.width/2-65/2, 15, 65, 65)];
+    UIImageView *cryFace = [[UIImageView alloc] initWithFrame:CGRectMake(self.wrongLabel.frame.size.width/2-65/2, 15, 65+cryOffside_size, 65+cryOffside_size)];
+    [cryFace setCenter:CGPointMake(self.wrongLabel.frame.size.width/2, self.wrongLabel.frame.size.height/2)];
     cryFace.image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"wrongImg" ofType:@"png"]];
     [self.wrongLabel addSubview:cryFace];
     [self.view addSubview:self.wrongLabel];
